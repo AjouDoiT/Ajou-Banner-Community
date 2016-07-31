@@ -3,7 +3,11 @@
 <head>
 <meta name = "viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset = "euc-kr">
+<<<<<<< HEAD
 <title>Áöµµ ±×¸®±â</title>
+=======
+<title>ì§€ë„ ê·¸ë¦¬ê¸°</title>
+>>>>>>> a24788440370fe5c9cda6003dd7f698b1237d55b
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
@@ -12,6 +16,7 @@
 		var geocoder = new google.maps.Geocoder();
 		var gps = navigator.geolocation;
 		var markerMaxWidth = 300;
+<<<<<<< HEAD
 		/*var locations = [
 		    ['¾ÆÁÖ´ë À²°î°ü',37.2821419,127.0462701,'<div>' +
 				'<h2>¾ÆÁÖ´ë À²°î°ü</h2>' +
@@ -22,6 +27,20 @@
 				'<h2>¾ÆÁÖ´ë ÆÈ´Ş°ü</h2>' +
 				'<p>¾ÆÁÖ´ë ÆÈ´Ş°üÀº ÄÄ°øÂîÁúÀÌµéÀÇ ¼ºÁöÀÌ´Ù.</p>' +
 				'<a href="portal.ajou.ac.kr" target="_blank">Æ÷Å»¾²</a>' +
+=======
+		
+		
+		/*var locations = [
+		    ['ì•„ì£¼ëŒ€ ìœ¨ê³¡ê´€',37.2821419,127.0462701,'<div>' +
+				'<h2>ì•„ì£¼ëŒ€ ìœ¨ê³¡ê´€</h2>' +
+				'<p>ì•„ì£¼ëŒ€ ìœ¨ê³¡ê´€ì€ êµì–‘ê³¼ëª©ì˜ ì„±ì§€ì´ë‹¤.</p>' +
+				'<a href="portal.ajou.ac.kr" target="_blank">í¬íƒˆì“°</a>' +
+				'</div>'],
+		    ['ì•„ì£¼ëŒ€ íŒ”ë‹¬ê´€',37.2843606,127.0444535,'<div>' +
+				'<h2>ì•„ì£¼ëŒ€ íŒ”ë‹¬ê´€</h2>' +
+				'<p>ì•„ì£¼ëŒ€ íŒ”ë‹¬ê´€ì€ ì»´ê³µì°Œì§ˆì´ë“¤ì˜ ì„±ì§€ì´ë‹¤.</p>' +
+				'<a href="portal.ajou.ac.kr" target="_blank">í¬íƒˆì“°</a>' +
+>>>>>>> a24788440370fe5c9cda6003dd7f698b1237d55b
 				'</div>']
 	    ];
 	    var infowindow = [
@@ -34,6 +53,7 @@
 		  					maxWidth: markerMaxWidth
 		  				})
 		  		        ];*/
+<<<<<<< HEAD
 		var locations = [
 		                 {lat : 37.399631,
 		               	  lng : 126.940675,
@@ -42,6 +62,18 @@
 		               	 {lat : 37.399269, 
 			               	  lng : 126.938223,
 			               	  title: "¼¼ºìÀÏ·¹ºì",
+=======
+		  		        
+		  		        
+		var locations = [
+		                 {lat : 37.399631,
+		               	  lng : 126.940675,
+		               	  title: "ìƒ˜ëª¨ë£¨ ì´ˆë“±í•™êµ",
+		               	  info: "<strong>Elemetary School<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"},
+		               	 {lat : 37.399269, 
+			               	  lng : 126.938223,
+			               	  title: "ì„¸ë¸ì¼ë ˆë¸",
+>>>>>>> a24788440370fe5c9cda6003dd7f698b1237d55b
 			               	  info: "<strong>Eleven of Seven<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"}
 		               	  ];
 		  		        
@@ -49,7 +81,11 @@
 
 			navigator.geolocation.getCurrentPosition(function (pos) {
 
+<<<<<<< HEAD
 				// ÇöÀç À§°æµµ °ª(GPS) º¯¼ö¿¡ ³Ö±â.
+=======
+				// í˜„ì¬ ìœ„ê²½ë„ ê°’(GPS) ë³€ìˆ˜ì— ë„£ê¸°.
+>>>>>>> a24788440370fe5c9cda6003dd7f698b1237d55b
 				var latitude = pos.coords.latitude;
 				var longitude = pos.coords.longitude;
 				var mapOptions = {
@@ -64,6 +100,10 @@
 				}
 				
 				map = new google.maps.Map(document.getElementById('map'),mapOptions);
+<<<<<<< HEAD
+=======
+				//í˜„ì¬ìœ„ì¹˜ ì£¼ë³€ì— ì›ê·¸ë¦¬ê¸°
+>>>>>>> a24788440370fe5c9cda6003dd7f698b1237d55b
 				var cityCircle = new google.maps.Circle({
 					center: new google.maps.LatLng(latitude,longitude),
 					//center: new google.maps.LatLng(37.2834866,127.0447932) ,
@@ -78,7 +118,11 @@
 				
 				});
 	        	cityCircle.setMap(map);
+<<<<<<< HEAD
 				// ÇöÀç À§Ä¡ ¸¶Ä¿ »ı¼º
+=======
+				// í˜„ì¬ ìœ„ì¹˜ ë§ˆì»¤ ìƒì„±
+>>>>>>> a24788440370fe5c9cda6003dd7f698b1237d55b
 				var myPosition = new google.maps.Marker({
 					position: new google.maps.LatLng(latitude,longitude),
 					//position: new google.maps.LatLng(37.2834866,127.0447932),
