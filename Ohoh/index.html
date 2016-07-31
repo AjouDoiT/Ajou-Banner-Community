@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="16년 2학기 학술제대비 웹팀">
+        <meta name="author" content="11안성수, 13계성혁, 13박명진, 15최홍범, 15고대권">
+
+        <title>AJOU BANNER COMMUNITY</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/modern-business.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- AngularJS Route를 위한 script-->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+        <style>
+            ng-view{
+                position: relative;
+                top:51px;
+            }
+        </style>
+
+    </head>
+
+    <body ng-app="mainApp" ng-controller="mainCtrl">
+
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html#/">A.B.C.</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#about" ng-click="menuClick()">About</a>
+                        </li>
+                        <li>
+                            <a href="#banner" ng-click="menuClick()">Banner</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Others <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#contact" ng-click="menuClick()">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="#faq" ng-click="menuClick()">FAQ</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><button class="btn btn-default" href="#" >Log In</button></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+
+        <!-- Page Content -->
+        <ng-view></ng-view>
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
+
+        <!-- Script to Activate the Carousel -->
+        <script>
+            var app = angular.module("mainApp", ["ngRoute"]);
+            app.controller('mainCtrl',function ($scope) {
+                $scope.menuClick = function(){
+                    // 작은 화면일 때 메뉴바가 닫히는 기능
+                };
+            });
+            app.config(function($routeProvider) {
+                $routeProvider
+                        .when("/", {
+                            templateUrl : "main.html"
+                        })
+                        .when("/about", {
+                            templateUrl : "about.html"
+                        })
+                        .when("/banner", {
+                            templateUrl : "banner.html"
+                        })
+                        .when("/contact", {
+                            templateUrl : "contact.html"
+                        })
+                        .when("/faq", {
+                            templateUrl : "faq.html"
+                        });
+            });
+            /* **이 부분은 차후에 구현<5초마다 캐러셀이 다음으로 넘어가는 기능>
+             $('.carousel').carousel({
+             interval: 5000 //changes the speed
+             })*/
+        </script>
+    </body>
+
+</html>
