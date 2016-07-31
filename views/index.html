@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <title>A.B.C.</title>
 
+    <!--Jquery-->
+    <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"   integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="   crossorigin="anonymous"></script>
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 
-<div ng-app="banner" ng-controller="bannerCtrl">
+<div ng-app="banner" ng-controller="bannerCtrl" class="container">
+    <h1>아주대학교 팔달관</h1>
+
     <ul class="ilst-group">
         <li ng-repeat="banner in banners | orderBy: '-date' "
             class="list-group-item">
-            <span>
-                <img src="{{banner.pfPic}}"/>
+            <span class="">
+                <img src="{{banner.pfPic}}" class="img-thumbnail"/>
             </span>
             <strong>{{banner.username}}</strong>
             <span> {{banner.body}}</span>
@@ -26,7 +29,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-<script src="javascript/bannerCtrl"></script>
+<script src="javascripts/bannerCtrl.js"></script>
 
 </body>
 </html>
