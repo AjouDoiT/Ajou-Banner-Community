@@ -39,18 +39,22 @@
         </div>
 
         <ul class="ilst-group col-lg-12">
-            <li ng-repeat="banner in banners | orderBy: '-date' "
-                class="list-group-item col-md-12">
-                <div>
-                        <span class="">
-                            <img src="{{banner.pfPic}}" class="img-thumbnail"/>
-                        </span >
-                    <strong class="">{{banner.username}}</strong>
-                    <span class="">{{banner.date}}</span>
-                        <span class="">
-                            <span class="glyphicon glyphicon-pencil"> edit</span>
-                            <span class="glyphicon glyphicon-trash"> remove</span>
-                        </span>
+            <li ng-repeat="banner in banners | orderBy: '-date' " class="list-group-item">
+                <div class="row">
+                    <div class="col-md-9 col-lg-10 col-sm-8  col-xs-8">
+                        <img src="{{banner.pfPic}}" class="img-thumbnail"/>
+                        <strong class="">{{banner.username}}</strong>
+                        <span class="">{{banner.date}}</span>
+                    </div>
+                    <div class="glyphicon glyphicon-pencil col-md-1 col-lg-1 col-sm-2 col-xs-2 " style="font-size:1.5em; margin-top:13px;"></div>
+                    <div class="glyphicon glyphicon-trash col-md-2 col-lg-1 col-sm-2 col-xs-2" style="font-size:1.5em;margin-top:13px;"></div>
+
+                    <!--
+                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                        <span class="glyphicon glyphicon-pencil"  style="vertical-align: middle;"></span>
+                        <span class="glyphicon glyphicon-trash"  style="vertical-align: middle;"></span>
+                    </div>
+                    -->
                 </div>
                 <span class="container"> {{banner.body}}</span>
             </li>
