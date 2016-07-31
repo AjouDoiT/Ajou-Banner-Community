@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name = "viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset = "euc-kr">
+<title>지도 그리기</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+	function initialize(){
+		var zoomLevel = 16;
+		var geocoder = new google.maps.Geocoder();
+		var gps = navigator.geolocation;
+		var markerMaxWidth = 300;
+		
+		
+		/*var locations = [
+		    ['아주대 율곡관',37.2821419,127.0462701,'<div>' +
+				'<h2>아주대 율곡관</h2>' +
+				'<p>아주대 율곡관은 교양과목의 성지이다.</p>' +
+				'<a href="portal.ajou.ac.kr" target="_blank">포탈쓰</a>' +
+				'</div>'],
+		    ['아주대 팔달관',37.2843606,127.0444535,'<div>' +
+				'<h2>아주대 팔달관</h2>' +
+				'<p>아주대 팔달관은 컴공찌질이들의 성지이다.</p>' +
+				'<a href="portal.ajou.ac.kr" target="_blank">포탈쓰</a>' +
+				'</div>']
+	    ];
+	    var infowindow = [
+		  		        new google.maps.InfoWindow({
+		  					content: locations[0][3],
+		  					maxWidth: markerMaxWidth
+		  				}),
+		  				new google.maps.InfoWindow({
+		  					content: locations[1][3],
+		  					maxWidth: markerMaxWidth
+		  				})
+		  		        ];*/
+		  		        
+		  		        
+		var locations = [
+		                 {lat : 37.399631,
+		               	  lng : 126.940675,
+		               	  title: "샘모루 초등학교",
+		               	  info: "<strong>Elemetary School<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"},
+		               	 {lat : 37.399269, 
+			               	  lng : 126.938223,
+			               	  title: "세븐일레븐",
+			               	  info: "<strong>Eleven of Seven<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"}
+		               	  ];
+		  		        
+		if (navigator.geolocation) {
+
+			navigator.geolocation.getCurrentPosition(function (pos) {
+
+				// 현재 위경도 값(GPS) 변수에 넣기.
+				var latitude = pos.coords.latitude;
+				var longitude = pos.coords.longitude;
+				var mapOptions = {
+						zoom: zoomLevel,
+						center: new google.maps.LatLng(latitude,longitude),
+						//center: new google.maps.LatLng(37.2834866,127.0447932),
+						navigationControl : false,
+						mapTypeControl : false,
+						scaleControl : true,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+						
+				}
+				
+				map = new google.maps.Map(document.getElementById('map'),mapOptions);
+				//현재위치 주변에 원그리기
+				var cityCircle = new google.maps.Circle({
+					center: new google.maps.LatLng(latitude,longitude),
+					//center: new google.maps.LatLng(37.2834866,127.0447932) ,
+					radius: 200,
+					strokeColor: "#000000",
+					strokeOpacity: 0.8,
+					strokeWeight: 2,
+					fillColor: "#808080",
+					fillOpacity: 0.5
+					
+					//center: new google.maps.LatLng(latitude,longitude) ,
+				
+				});
+	        	cityCircle.setMap(map);
+				// 현재 위치 마커 생성
+				var myPosition = new google.maps.Marker({
+					position: new google.maps.LatLng(latitude,longitude),
+					//position: new google.maps.LatLng(37.2834866,127.0447932),
+					map: map,
+					draggable: false,
+					icon: "http://maps.google.com/mapfiles/ms/micons/man.png"
+				});
+				
+
+				for(index in locations)addMarker(locations[index]);
+				
+				function addMarker(data){
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(data.lat,data.lng),
+						map: map,
+						title: data.title,
+						draggable:false,
+						animation: google.maps.Animation.BOUNCE
+					});
+					var contentString = data.info;
+					var infowindow = new google.maps.InfoWindow({content: contentString});
+					google.maps.event.addListener(marker,"click",function(){
+						
+						infowindow.open(map,marker);
+					});
+				}
+			
+				/*for(i=0;i<locations.length;i++){
+					
+					marker= new google.maps.Marker({
+						position:new google.maps.LatLng(locations[i][1],locations[i][2]),
+						map: map,
+						draggable: false,
+						title: locations[i][0]
+					});
+					
+									
+				};*/	
+
+			
+			}, function (error) {
+				switch (error.code) {
+				case 1:
+					$("#errormsg").html("User denied the request for Geolocation.");
+					break;
+				case 2:
+					$("#errormsg").html("Location information is unavailable.");
+					break;
+				case 3:
+					$("#errormsg").html("The request to get user location timed out.");
+					break;
+				case 0:
+					$("#errormsg").html("An unknown error occurred.");
+					break;
+				}
+			});
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
+		
+}</script>
+</head>
+<body onload = "initialize()">
+	<div id="map" style="width:300px; height:300px;"></div>
+</body>
+</html>
