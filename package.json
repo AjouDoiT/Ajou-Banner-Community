@@ -1,0 +1,28 @@
+{
+  "name": "doit-16web",
+  "version": "0.0.1",
+  "description": "Ajou Banner Community application based on location,via 2016 Doit Web study team",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lawrence-kaybob/DoiT-16SWeb.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/lawrence-kaybob/DoiT-16SWeb/issues"
+  },
+  "homepage": "https://github.com/lawrence-kaybob/DoiT-16SWeb#readme",
+
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  }
+}
