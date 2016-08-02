@@ -7,4 +7,9 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.resolve('views/index.html'));
 });
 
+router.get('/map',function(req,res,next){
+	res.sendFile(path.resolve('views/map.html'));
+});
+
+
 module.exports = router;
