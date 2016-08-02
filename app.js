@@ -28,6 +28,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+/**
+ * DataBase HANDLING
+ */
+app.use('/',require('./db'));
+app.use('/api/dbRouter',require('/api/dbRouter')(app));
 
 /**
  * ERROR HANDLING
