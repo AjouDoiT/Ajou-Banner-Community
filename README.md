@@ -17,3 +17,9 @@ To-Do List
 
 - 명진이형 레이아웃 이용하기 위해 내 임시 레이아웃 지움 
 - 서버와 연동 없는 게시판 (아주 간단한 형태) 짬. 
+
+***2016.08.01**
+- Express Generator로 생성된 server에 Layout을 올림
+    //git을 잘못 활용하여... 전에 파일이 날라가서 뭐때문에 error가 났었는지 찾지못함
+    //아마 디렉토리(/Ohoh)로 따로 처리해서 그런 것 같음. 디렉토리를 잘 하자........
+- 앞으로 Todo List : Navber toggle, Carousel interval, FAQ toggle, 로그인 눌렀을 때 로그인이 되도록
