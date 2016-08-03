@@ -5,5 +5,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="DoiT-16SWeb node_modules" level="project" />
+<<<<<<< HEAD
+=======
+    <orderEntry type="library" name="angularjs-DefinitelyTyped" level="application" />
+>>>>>>> 0a1abee8d98804742a40ae3b652ad5efe73a51d9
   </component>
 </module>

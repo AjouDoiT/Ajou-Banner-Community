@@ -608,8 +608,9 @@ if (typeof jQuery === 'undefined') {
       .attr('aria-expanded', true)
 
     this.$trigger
-        .removeClass('collapsed')
-        .attr('aria-expanded', true)
+
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
 
     this.transitioning = 1
 
