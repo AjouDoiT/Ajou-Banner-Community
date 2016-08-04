@@ -1,7 +1,0 @@
-ng-view {
-    position: relative;
-    top: 51px;
-}
-/* navbar의 height만큼 ng-view를 내린다. */
-
-
