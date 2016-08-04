@@ -4,10 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
-
 var app = express();
+
+var mongoose = require('mongoose');
+var Post = require('./model/post');
+var dbroutes = require('./routes/db')(app,Post);
+
+
+
 
 // view engine setup is not yet avaliable.
 //app.set('views', path.join(__dirname, 'views'));
@@ -31,8 +36,13 @@ app.use('/', routes);
 /**
  * DataBase HANDLING
  */
-app.use('/',require('./db'));
-app.use('/api/dbRouter',require('/api/dbRouter')(app));
+
+mongoose.createConnection('mongodb://localhost/ABCproject');
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'connection error'));
+db.once('open',function callback(){
+	console.log("MongoDB successfully connected.");
+});
 
 /**
  * ERROR HANDLING
