@@ -12,7 +12,7 @@ app.config(function($routeProvider) {
         .when("/contact", {templateUrl : "templates/contact.html"})
         .when("/faq", {templateUrl : "templates/faq.html"});
 });
-app.controller('appCtrl',function ($scope) {
+app.controller('appCtrl',function ($scope, $auth) {
     angular.element("#toggleButton").addClass("collapsed");
     $scope.menuClick = function(){
         // 작은 화면일 때 메뉴바가 닫히는 기능
@@ -20,6 +20,24 @@ app.controller('appCtrl',function ($scope) {
         if (!button.attr('class').includes('collapsed'))
             button.click();
     };
+
+    $scope.toggleAuth = function(){
+        if(!firebase.auth().currentUser){
+
+            // Firebase FB Login Provider로 시작
+            // 팝업창 없이 현화면에서 redirect
+            var provider = new firebase.auth.FacebookAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
+        else{
+            // 로그아웃
+            firebase.auth().signOut();
+        }
+    };
+    
+    // Authentication Initializaiotn
+    $auth.init();
+
 });
 
 /**
