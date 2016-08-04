@@ -1,7 +1,7 @@
 /**
  * 
  */
-var db = require('./db.js');
+var db = require('mongoose');
 var Schema = db.Schema;
 var postSchema = new Schema({
     	uid:	{type: String, required: true},
@@ -10,4 +10,4 @@ var postSchema = new Schema({
         date:       {type: Date, required: true, default: Date.now()}
     });
  
-module.exports= mongoose.model('post',postSchema);
+module.exports= db.model('post',postSchema);
