@@ -1,4 +1,5 @@
 var express = require('express');
+var router=express.Router();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -31,8 +32,6 @@ app.use('/', routes);
 /**
  * DataBase HANDLING
  */
-app.use('/',require('./db'));
-app.use('/api/dbRouter',require('/api/dbRouter')(app));
 
 /**
  * ERROR HANDLING
