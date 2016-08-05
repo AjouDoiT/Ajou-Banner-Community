@@ -24,4 +24,10 @@ To-Do List
     - Applying prototype of ng-animation
     - set view engine to pug(jade) 
     - merge mj-dev's layout to Dev-credt
+    
+***2016.08.05***
+
+-Sungsoo
+	-merged with Dev-credt
+	-modified map.html with higher accuracy and added addditional marker
 
