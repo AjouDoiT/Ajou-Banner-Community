@@ -11,7 +11,7 @@ module.exports = function(app,Post){
 	
 	//Get posts by id
 	app.get('/freeboard/posts/id',function(req,res){
-		Post.find({username: req.params.username},{_id:0, username:1,body:1,date:1},function(errposts){
+		Post.find({username: req.params.username},{_id:0, username:1,body:1,date:1},function(err,posts){
 			if(err) return res.status(500).json({error:err});
 			if(posts.length ===0 ) return res.status(404).json({error: "It doesn't match with any posts"});
 			res.json(posts);
@@ -23,7 +23,6 @@ module.exports = function(app,Post){
 		var post = new Post();
 		post.uid = req.body.uid;
 		post.username = req.body.username;
-		post.password = req.body.password;
 		post.body = req.body.body;
 		post.date = Date.now();
 		
