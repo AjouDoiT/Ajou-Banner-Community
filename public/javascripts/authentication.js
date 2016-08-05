@@ -13,7 +13,7 @@ var config = {
 	apiKey: "AIzaSyACXoY2tVZCiIq2b8Kx0rKcC3pyWB5CPFI",
 	authDomain: "ajoubannercom.firebaseapp.com",
 	databaseURL: "https://ajoubannercom.firebaseio.com",
-	storageBucket: "ajoubannercom.appspot.com",
+	storageBucket: "ajoubannercom.appspot.com"
 	};
 firebase.initializeApp(config);
 
@@ -94,9 +94,9 @@ app.service('$auth', function(){
 				// 적용될 수 있게 스크립트만 짜주면 될 듯
 				// currentUser 객체는 global하게 접근 가능!
 				currentUser = {
-					displayName : user.displayName;
-					email : user.email;
-					photoURL : user.photoURL;
+					displayName : user.displayName,
+					email : user.email,
+					photoURL : user.photoURL
 				}
 			}
 			else{

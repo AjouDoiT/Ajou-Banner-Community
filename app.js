@@ -21,7 +21,13 @@ var app = express();
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
-app.use(bodyParser.json());
+/*
+* Body-parser should be disabled for default
+* due to error on reading JWT Token
+* by lkaybob
+*/
+
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,7 +46,7 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
+/*
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -56,6 +62,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.sendFile(path.resolve('views/error.html'));
 });
-
+*/
 
 module.exports = app;

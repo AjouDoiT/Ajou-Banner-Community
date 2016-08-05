@@ -18,9 +18,7 @@
 
 		// Callback 함수들 정의하고 이를 이후에
 		// app.run()으로 실행한다.
-		app.service('$auth', ['$http', function(){
-
-			var currentUser;
+		app.service('$auth', function($http){
 
 			this.init = function(){
 			firebase.auth().getRedirectResult().then(function(result){
@@ -56,14 +54,17 @@
 
 			firebase.auth().onAuthStateChanged(function(user){
 				if(user){
-					// 로그인이 확인되면 앵귤러 영역에
-					// 현재 사용자 정보를 객체로 넘겨준다.
-					// TODO : 제대로 먹히는지 확인해볼 것
-					currentUser = {
-						displayName : user.displayName,
-						email : user.email,
-						photoURL : user.photoURL
-					}
+					firebase.auth().currentUser.getToken(false).then(function(idToken){
+						$http.post('/', idToken).success(function(response){
+							console.log(response);
+						}).error(function(error){
+							console.log(error);
+						});
+					}).catch(function(error){
+						console.log(error);
+						// Handle error
+					});
+
 				}
 				else{
 					// 로그아웃이 됐을 경우의 로직
@@ -73,7 +74,7 @@
 			});
 		};
 
-	}]);
+	});
 
 	app.controller("sampleCtrl", function($scope, $http, $auth){
 		// 컨트롤러 생성하면
@@ -89,15 +90,6 @@
 			else{
 				firebase.auth().signOut();
 			}
-
-			// getToken cannot be found so far
-			// $http service cannot be found so far
-			// Matter of referencing (한쪽이 되면 한 쪽이 안되는 식)
-			firebase.auth().currentUser.getToken(false).then(function(idToken){
-				$http.post('/data', idToken);
-			}).catch(function(error){
-				//Handle Error
-			});
 		};
 
 		$auth.init();
