@@ -12,6 +12,8 @@ app.config(function($routeProvider) {
         .when("/contact", {templateUrl : "templates/contact.html"})
         .when("/faq", {templateUrl : "templates/faq.html"});
 });
+
+//use as global controller
 app.controller('appCtrl',function ($scope, $auth) {
     angular.element("#toggleButton").addClass("collapsed");
     $scope.menuClick = function(){
@@ -23,29 +25,105 @@ app.controller('appCtrl',function ($scope, $auth) {
 
     $scope.toggleAuth = function(){
         if(!firebase.auth().currentUser){
-
             // Firebase FB Login Provider로 시작
             // 팝업창 없이 현화면에서 redirect
             var provider = new firebase.auth.FacebookAuthProvider();
-            firebase.auth().signInWithRedirect(provider);
+            firebase.auth().signInWithRedirect(provider).then(function (){
+                $scope.showModal = false;
+            });
         }
         else{
             // 로그아웃
             firebase.auth().signOut();
         }
     };
-    
     // Authentication Initializaiotn
     $auth.init();
+
+    $auth.setScopeOnAuthStateChange($scope);
+
+    // modal ctrl
+    $scope.showModal = false;
+    $scope.$on('$viewContentLoaded', function() {
+        //call it here
+       $scope.showModal = !$auth.checkSignedIn();
+    });
+  //  $scope.buttonClicked = "";
+  //  $scope.toggleModal = function(btnClicked) {
+  //      $scope.buttonClicked = btnClicked;
+  //      $scope.showModal = !$scope.showModal;
+  //  }
+
 
 });
 
 /**
  * Created by credt on 2016-07-31.
  */
-app.controller('mainCtrl', function ($scope){
-    $scope.pageClass = 'page-main'
+app.controller('mainCtrl', function ($scope, $auth){
+    // for animation
+    $scope.pageClass = 'page-main';
+
+    $scope.logout = function () {
+        firebase.auth().signOut();
+    }
+    $scope.ck = function () {
+        alert($auth.checkSignedIn());
+    };
 });
+
+app.directive('modal', function () {
+    return {
+        template: '<div class="modal fade"  data-keyboard="false" data-backdrop="static">' +
+        '<div class="modal-dialog">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+        '<h4 class="modal-title">Ajou Banner Community</h4>' +
+        '</div>' +
+        '<div class="modal-body" ng-transclude></div>' +
+        '</div>' +
+        '</div>' +
+        '</div>',
+        restrict: 'E',
+        transclude: true,
+        replace:true,
+        scope:true,
+        link: function postLink(scope, element, attrs) {
+            scope.title = attrs.title;
+
+            scope.$watch(attrs.visible, function(value){
+                if(value == true)
+                    $(element).modal('show');
+                else
+                    $(element).modal('hide');
+            });
+
+            $(element).on('shown.bs.modal', function(){
+                scope.$apply(function(){
+                    scope.$parent[attrs.visible] = true;
+                });
+            });
+
+            $(element).on('hidden.bs.modal', function(){
+                scope.$apply(function(){
+                    scope.$parent[attrs.visible] = false;
+                });
+            });
+        }
+    };
+});
+
+
+
+
+
+
+
+
+
+
+
 app.controller('bannerCtrl', function ($scope) {
 
     $scope.pageClass = 'page-banner';

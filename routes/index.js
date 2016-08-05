@@ -4,9 +4,10 @@ var router = express.Router();
 router.get('/banner', function (req, res, next){
   res.render('banner');
 });
-router.get('/main', function (req, res, next){
-  res.render('main');
+router.get('/main', function (req,res, next) {
+  res.render('main')
 });
+
 
 
 /* GET layout  page. */

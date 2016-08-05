@@ -18,7 +18,7 @@ firebase.initializeApp(config);
 
 // Individual service for firebase authentication
 // Should be included
-app.service('$auth', function(){
+app.service('$auth', function($route){
 	// 최소한의 정보만 담을 객체
 	// firebase 객체를 사용하지 않도록 하기 위함임!
 	var currentUser;
@@ -57,12 +57,18 @@ app.service('$auth', function(){
 
 			}
 		});
+	};
 
+	this.setScopeOnAuthStateChange = function ($scope) {
 		firebase.auth().onAuthStateChanged(function(user){
 			if(user){
+				//alert("b");
+				$scope.state = user.displayName;
+				$scope.showModal = false;
+				// currentUser 객체는 global하게 접근 가능!
+				$route.reload();
 				// 현 사용자 정보가 메인 페이지에
 				// 적용될 수 있게 스크립트만 짜주면 될 듯
-				// currentUser 객체는 global하게 접근 가능!
 				currentUser = {
 					displayName : user.displayName,
 					email : user.email,
@@ -70,13 +76,15 @@ app.service('$auth', function(){
 				}
 			}
 			else{
+				//$scope.showModal = true;
+				$scope.state = "";
+				$route.reload();
 				// 로그아웃이 됐을 경우의 로직
 				// index.html(메인페이지 화면)으로 redirect하게
 				// 하면 될 듯
 			}
 		});
-
-	};
+	}
 
 	// 로그인 여부 확인
 	// 현재는 T/F만 return하는 것으로
