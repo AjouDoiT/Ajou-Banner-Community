@@ -35,13 +35,20 @@ app.use('/', routes);
  * DataBase HANDLING
  */
 
-mongoose.createConnection('mongodb://localhost/ABCproject');
-var db = mongoose.connection;
-db.on('error',console.error.bind(console,'connection error'));
-db.once('open',function callback(){
-	console.log("MongoDB successfully connected.");
+mongoose.Promise = global.Promise;
+mongoose.createConnection('mongodb://aws.lkaybob.pe.kr/ABCproject',function (err){
+    if(err) {
+        console.log('MongoDB connection error. ' + err);
+        return;
+    }
+    console.log("MongoDB successfully connected.")
 });
 
+var user1 = new Post({uid: '123123', username: 'Sungsoo Ahn', body: 'Hi friends', date: Date.now()});
+user1.save(function(err,user1){
+	if(err)
+		console.log("save error");
+});
 /**
  * ERROR HANDLING
  */
