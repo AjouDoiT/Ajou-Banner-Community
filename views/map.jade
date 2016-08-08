@@ -115,6 +115,11 @@ html
                     alert("Geolocation is not supported by this browser.");
                 }
             }
-    body(onload='initialize()')
+            // onload attribute at body tag does not work
+            // Invoked jQuery statement forcefully
+            // by lkaybob
+            window.onload = initialize();
+
+    body
         #map(style='width:1200px; height:600px;')
         h1 backbakckbakck
