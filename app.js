@@ -35,20 +35,25 @@ app.use('/', routes);
  * DataBase HANDLING
  */
 
-mongoose.Promise = global.Promise;
-mongoose.createConnection('mongodb://aws.lkaybob.pe.kr/ABCproject',function (err){
+
+/*mongoose.createConnection('mongodb://aws.lkaybob.pe.kr/ABCproject',function (err){
     if(err) {
         console.log('MongoDB connection error. ' + err);
         return;
     }
-    console.log("MongoDB successfully connected.")
+    console.log("MongoDB connection is successfully created.")
+});*/
+mongoose.connect('mongodb://aws.lkaybob.pe.kr/ABCproject');
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'connection error'));
+db.once('open',function callback(){
+	console.log("mongo db connection ok.");
 });
 
-var user1 = new Post({uid: '123123', username: 'Sungsoo Ahn', body: 'Hi friends', date: Date.now()});
-user1.save(function(err,user1){
-	if(err)
-		console.log("save error");
-});
+var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'});
+console.log(user1.date);
+user1.save();
+
 /**
  * ERROR HANDLING
  */
