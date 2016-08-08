@@ -27,8 +27,6 @@ var server = http.createServer(app);
 
 server.listen(port, function (){
   console.log('-=-=-=-=-=-=- Server started at port ' + port);
-  console.log('@ Ajou Banner Community 2016')
-
 });
 server.on('error', onError);
 server.on('listening', onListening);

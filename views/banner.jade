@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
    Created by credt on 2016-08-04.
 .container(ng-controller='bannerCtrl')
@@ -26,3 +27,34 @@
                       <span class="glyphicon glyphicon-trash"  style="vertical-align: middle;"></span>
                       </div>
                 span.container  {{banner.body}}
+=======
+//
+   Created by credt on 2016-08-04.
+
+.container(ng-controller='bannerCtrl')
+    .row
+        .col-lg-12.page-header
+            .row
+                .col-lg-2.col-lg-offset-10
+                    button.btn.btn-default.pull-right(type='button')
+                        span.glyphicon.glyphicon-remove(aria-hidden='true')  Exit
+            .row
+                .col-lg-12
+                    h1.text-center
+                        strong 아주대학교 팔달관
+        ul.ilst-group.col-lg-12
+            li.list-group-item(ng-repeat="banner in banners | orderBy: '-date' ")
+                .row
+                    .col-md-9.col-lg-10.col-sm-8.col-xs-8
+                        img.img-thumbnail(src='{{banner.pfPic}}')
+                        strong {{banner.username}}
+                        span {{banner.date}}
+                    .glyphicon.glyphicon-pencil.col-md-1.col-lg-1.col-sm-2.col-xs-2(style='font-size:1.5em; margin-top:13px;')
+                    .glyphicon.glyphicon-trash.col-md-2.col-lg-1.col-sm-2.col-xs-2(style='font-size:1.5em;margin-top:13px;')
+                    //
+                      <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                      <span class="glyphicon glyphicon-pencil"  style="vertical-align: middle;"></span>
+                      <span class="glyphicon glyphicon-trash"  style="vertical-align: middle;"></span>
+                      </div>
+                span.container  {{banner.body}}
+>>>>>>> 2b2f555f25e3a5a74a7ea7fba57f30e1383865fc
