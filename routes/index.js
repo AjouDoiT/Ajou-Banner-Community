@@ -1,10 +1,21 @@
 var express = require('express');
-var path = require('path');
 var router = express.Router();
 
-/* GET home page. */
+router.get('/banner', function (req, res, next){
+    res.render('banner');
+});
+
+router.get('/map',function (req, res, next) {
+    res.render('map');
+});
+
+router.get('/main', function (req, res, next){
+    res.render('main');
+});
+
+/* GET layout  page. */
 router.get('/', function(req, res, next) {
-    res.sendFile(path.resolve('views/index.html'));
+    res.render('layout')
 });
 
 module.exports = router;

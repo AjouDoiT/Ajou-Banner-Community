@@ -9,18 +9,13 @@ var routes = require('./routes/index');
 
 var app = express();
 
-// view engine setup is not yet avaliable.
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'html');
-
-/**
- * we will (temporally) use raw html file by sendfile method .
- * by credtiger96
- */
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // we have to make favicon
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -46,7 +41,10 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.sendFile(path.resolve('views/error.html'));
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
   });
 }
 
@@ -54,8 +52,10 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.sendFile(path.resolve('views/error.html'));
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
-
 
 module.exports = app;
