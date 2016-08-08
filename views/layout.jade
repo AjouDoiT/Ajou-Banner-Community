@@ -55,10 +55,17 @@ body(ng-app='app', ng-controller='appCtrl')
                                     a(href='#faq', ng-click='menuClick()') FAQ
                 // /.navbar-collapse
             // /.container
+        //login modal
+        modal(visible='showModal')
+            .container
+                button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
+                    span(class="fa fa-facebook")
+                    | Sign in with Facebook
 
         // Page Content
-        ng-view(class='page {{ pageClass }}')
 
+        ng-view(class='page {{ pageClass }}')
+        .jumbotron {{state}}
         // jQuery
         script(src='https://code.jquery.com/jquery-3.1.0.slim.min.js',integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" ,crossorigin="anonymous")
         // Bootstrap Core JavaScript

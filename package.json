@@ -20,9 +20,13 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+<<<<<<< HEAD
     "jade": "~1.11.0",
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.8",
+=======
+    "jade": "^1.11.0",
+>>>>>>> d7b572b12e3cf7760a294d63d7b75f5550d8fd28
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }

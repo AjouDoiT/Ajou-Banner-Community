@@ -30,4 +30,3 @@ To-Do List
 -Sungsoo
 	-merged with Dev-credt
 	-modified map.html with higher accuracy and added addditional marker
-
