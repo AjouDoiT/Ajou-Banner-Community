@@ -41,8 +41,21 @@ router.get('/main', function (req,res, next) {
 
 
 /* GET layout  page. */
+router.get('/banner', function (req, res, next){
+    res.render('banner');
+});
+
+router.get('/map',function (req, res, next) {
+    res.render('map');
+});
+
+router.get('/main', function (req, res, next){
+    res.render('main');
+});
+
+/* GET layout  page. */
 router.get('/', function(req, res, next) {
-  res.render('layout')
+    res.render('layout')
 });
 
 /*

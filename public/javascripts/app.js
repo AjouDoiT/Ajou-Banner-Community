@@ -1,3 +1,4 @@
+
 /**
  * Created by credt on 2016-08-04.
  */
@@ -7,13 +8,9 @@ var app = angular.module("app", ['ngRoute', 'ngAnimate']);
 app.config(function($routeProvider) {
     $routeProvider
         .when("/", {templateUrl : "main", controller: 'mainCtrl'})
-        .when("/about", {templateUrl : "templates/about.html"})
-        .when("/banner", {templateUrl : "banner", controller : 'bannerCtrl'})
-        .when("/contact", {templateUrl : "templates/contact.html"})
-        .when("/faq", {templateUrl : "templates/faq.html"});
+        .when("/map", {templateUrl : "map", controller: 'mapCtrl'})
+        .when("/banner", {templateUrl : "banner", controller : 'bannerCtrl'});
 });
-
-//use as global controller
 app.controller('appCtrl',function ($scope, $auth) {
     angular.element("#toggleButton").addClass("collapsed");
     $scope.menuClick = function(){
