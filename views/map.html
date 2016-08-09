@@ -6,6 +6,7 @@
 <title>지도 그리기</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
 <script> 
 		function initialize(){
 		var zoomLevel = 16;
@@ -61,7 +62,7 @@
 				}
 				
 				map = new google.maps.Map(document.getElementById('map'),mapOptions);
-				
+				var geoloccontrol = new klokantech.GeolocationControl(map, 18);
 				var cityCircle = new google.maps.Circle({
 					center: new google.maps.LatLng(latitude,longitude),
 					//center: new google.maps.LatLng(37.2834866,127.0447932) ,
