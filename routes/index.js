@@ -31,26 +31,38 @@ firebase.initializeApp({
 * by. lkaybob
 */
 
+router.get('/banner', function (req, res, next){
+  res.render('banner');
+});
+router.get('/main', function (req,res, next) {
+  res.render('main')
+});
+
+
+
+/* GET layout  page. */
 router.get('/', function(req, res, next) {
-  res.sendFile(path.resolve('views/custom_sample.html'));
+  res.render('layout')
 });
 
 /*
-* Should invoke bodyParser manually to read
-* request payload (JWT Token).
-* If suceeded, UID in plaintext will be printed.
-* If not, error message will be printed.
-* by. lkaybob
-*/
-router.post('/', bodyParser.text({ type: 'json' }), function(req, res){
-	firebase.auth().verifyIdToken(req.body).then(function(decodedToken){
-		var uid = decodedToken.sub;
+ * Sample Code to check idToken
+ * Should invoke bodyParser manually to read
+ * request payload (JWT Token).
+ * If suceeded, UID in plaintext will be printed.
+ * If not, error message will be printed.
+ * by. lkaybob
 
-		console.log(uid);
-	}).catch(function(error){
-		console.log(req.body);
-		console.log(error);
-	});
+router.post('/', bodyParser.text({ type: 'json' }), function(req, res){
+    firebase.auth().verifyIdToken(req.body).then(function(decodedToken){
+        var uid = decodedToken.sub;
+
+        console.log(uid);
+    }).catch(function(error){
+        console.log(req.body);
+        console.log(error);
+    });
 });
+*/
 
 module.exports = router;
