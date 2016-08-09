@@ -5,11 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var https = require('https');
+var http = require('http');
 
 var routes = require('./routes/index');
 
 var app = express();
+var redirectApp = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -28,9 +29,15 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', routes);
 
+http.createServer(redirectApp).listen(8080, function(){
+    console.log('Redirect App Created');
+});
+
+redirectApp.use('*', function(req, res){
+    res.redirect('https://' + req.hostname + req.path);
+});
 /**
  * ERROR HANDLING
  */

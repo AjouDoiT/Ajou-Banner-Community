@@ -111,15 +111,9 @@ app.directive('modal', function () {
     };
 });
 
-
-
-
-
-
-
-
-
-
+app.controller('mapCtrl', function($scope){
+   next();
+});
 
 app.controller('bannerCtrl', function ($scope) {
 
