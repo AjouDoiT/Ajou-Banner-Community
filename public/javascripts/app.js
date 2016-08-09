@@ -1,4 +1,3 @@
-
 /**
  * Created by credt on 2016-08-04.
  */
@@ -111,9 +110,9 @@ app.directive('modal', function () {
     };
 });
 
-app.controller('mapCtrl', function($scope){
-   next();
-});
+app.controller('mapCtrl',function ($scope) {
+    $scope.pageClass = 'page-map';
+})
 
 app.controller('bannerCtrl', function ($scope) {
 

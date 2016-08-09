@@ -25,21 +25,6 @@ firebase.initializeApp({
 	databaseURL: "https://ajoubannercom.firebaseio.com"
 });
 
-/*
-* Redirects to custom_sample.html
-* to check Facebook Login & JWT Auth
-* by. lkaybob
-*/
-
-router.get('/banner', function (req, res, next){
-  res.render('banner');
-});
-router.get('/main', function (req,res, next) {
-  res.render('main')
-});
-
-
-
 /* GET layout  page. */
 router.get('/banner', function (req, res, next){
     res.render('banner');

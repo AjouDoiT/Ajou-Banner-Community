@@ -94,6 +94,3 @@ app.service('$auth', function($route){
 		else
 			return false;
 	}
-
-
-});
