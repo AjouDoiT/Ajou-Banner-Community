@@ -7,6 +7,22 @@
 var app = require('../app');
 var debug = require('debug')('tmp:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+
+/**
+* Set the options for https server
+*/
+
+var options = {
+  hostname: 'aws.lkaybob.pe.kr',
+  port: 443,
+  path: '/secure',
+  method: 'GET',
+  key: fs.readFileSync('TODO: Path to private key'),
+  cert: fs.readFileSync('TODO: Path to cert'),
+  agent: false
+};
 
 /**
  * Get port from environment and store in Express.
@@ -31,6 +47,15 @@ server.listen(port, function (){
 });
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+* Create https server
+*/
+
+https.createServer(options, function(req, res){
+  res.writeHead(200);
+  res.end("Check the green lock!!\n");
+}).listen(8080);
 
 /**
  * Normalize a port into a number, string, or false.
