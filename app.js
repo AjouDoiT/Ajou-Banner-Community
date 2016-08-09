@@ -1,4 +1,3 @@
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -21,10 +20,9 @@ var dbroutes = require('./routes/db')(app,Post);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
->>>>>>> 2b2f555f25e3a5a74a7ea7fba57f30e1383865fc
 
 // we have to make favicon
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
 app.use(bodyParser.json());
