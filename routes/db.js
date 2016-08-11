@@ -1,4 +1,7 @@
-
+/**
+ * Created by ss on 07/20/2016
+ * routing for data
+ */
 
 module.exports = function(app,Post){
 	//Get all posts

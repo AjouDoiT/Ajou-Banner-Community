@@ -6,8 +6,8 @@ html
         meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
         meta(charset='euc-kr')
         title 지도 그리기
-        script(src='http://code.jquery.com/jquery-latest.min.js')
-        script(src='https://maps.googleapis.com/maps/api/js?sensor=false')
+        script(src='https://code.jquery.com/jquery-latest.min.js')
+        script(src='https://cdn.klokantech.com/maptilerlayer/v1/index.js')
         script.
             function initialize(){
                 var zoomLevel = 16;
@@ -56,6 +56,7 @@ html
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         }
                         map = new google.maps.Map(document.getElementById('map'),mapOptions);
+                        var geoloccontrol = new klokantech.GeolocationControl(map, 18);
                         var cityCircle = new google.maps.Circle({
                             center: new google.maps.LatLng(latitude,longitude),
                             //center: new google.maps.LatLng(37.2834866,127.0447932) ,
@@ -73,7 +74,7 @@ html
                             //position: new google.maps.LatLng(37.2834866,127.0447932),
                             map: map,
                             draggable: false,
-                            icon: "http://maps.google.com/mapfiles/ms/micons/man.png"
+                            icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
                         });
                         console.log(latitude + longitude);
                         //반경500m 이내의 마커만 표시하기
