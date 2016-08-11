@@ -4,8 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
+var http = require('http');
+
 var routes = require('./routes/index');
-var app = express();	
+
+var app = express();
+var redirectApp = express();
 
 
 var mongoose = require('mongoose');
@@ -13,26 +18,27 @@ var Post = require('./model/post');
 var dbroutes = require('./routes/db')(app,Post);
 
 
-/**
- * we will (temporally) use raw html file by sendfile method .
- * by credtiger96
- */
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// we have to make favicon
+// Setting Favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
-app.use(bodyParser.json());
+/*
+* Body-parser should be disabled for default
+* due to error on reading JWT Token
+* by lkaybob
+*/
+
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', routes);
 /**
  * DataBase HANDLING
+ * by. FrogAhn
  */
 
 
@@ -54,6 +60,17 @@ var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'
 console.log(user1.date);
 user1.save();
 
+/**
+ * Redirects from HTTP to HTTPS
+ * by. lkaybob
+ */
+http.createServer(redirectApp).listen(8080, function(){
+    console.log('Redirect App Created');
+});
+
+redirectApp.use('*', function(req, res){
+    res.redirect('https://' + req.hostname + req.path);
+});
 /**
  * ERROR HANDLING
  */
@@ -90,4 +107,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-

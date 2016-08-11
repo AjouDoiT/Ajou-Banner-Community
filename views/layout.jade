@@ -23,7 +23,7 @@ html(lang='ko')
           script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
           script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
 
-        script(src='http://code.jquery.com/jquery-latest.min.js')
+        script(src='https://code.jquery.com/jquery-latest.min.js')
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCLtlT689HE_h3GylLm-XKe8Uahz6YJQjU')
 
 body(ng-app='app', ng-controller='appCtrl')
@@ -59,22 +59,30 @@ body(ng-app='app', ng-controller='appCtrl')
                                     a(href='#faq', ng-click='menuClick()') FAQ
                 // /.navbar-collapse
             // /.container
+        //login modal
+        modal(visible='showModal && default')
+            .container
+                button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
+                    span(class="fa fa-facebook")
+                    | Sign in with Facebook
 
         // Page Content
         ng-view(class='page {{ pageClass }}')
-
+        .jumbotron {{state}}
         // jQuery
         script(src='https://code.jquery.com/jquery-3.1.0.slim.min.js',integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" ,crossorigin="anonymous")
-        // Bootstrap Core JavaScript
-        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        script(src='https://code.jquery.com/jquery-latest.min.js')
 
             // AngularJS와 Route를 위한 script
-        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
-        script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js')
-        script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js")
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js')
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js")
+
+        // Bootstrap Core JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
         // Contact Form JavaScript
         // Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file.// Script to Activate the Carousel
         script(src='https://www.gstatic.com/firebasejs/3.2.0/firebase.js')
         script(src='javascripts/app.js')
         script(src='javascripts/authentication.js')
-        script(src='http://code.jquery.com/jquery-latest.min.js')
+

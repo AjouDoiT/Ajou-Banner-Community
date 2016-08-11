@@ -24,6 +24,7 @@
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.8",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "firebase": "~3.2.1"
   }
 }
