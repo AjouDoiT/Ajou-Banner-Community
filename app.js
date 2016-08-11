@@ -12,7 +12,6 @@ var routes = require('./routes/index');
 var app = express();
 var redirectApp = express();
 
-
 var mongoose = require('mongoose');
 var Post = require('./model/post');
 var dbroutes = require('./routes/db')(app,Post);
@@ -40,7 +39,6 @@ app.use('/', routes);
  * DataBase HANDLING
  * by. FrogAhn
  */
-
 
 /*mongoose.createConnection('mongodb://aws.lkaybob.pe.kr/ABCproject',function (err){
     if(err) {
