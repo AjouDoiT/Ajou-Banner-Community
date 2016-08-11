@@ -1,3 +1,8 @@
-.navbar{
+.navbar, .navbar-nav>li>.dropdown-menu{
     background-color: #0a3e92;
+    border : none;
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-toggle .icon-bar, .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover, .dropdown-menu>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+    color: #ffff33;
 }
