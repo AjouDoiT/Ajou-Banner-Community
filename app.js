@@ -56,9 +56,9 @@ db.once('open',function callback(){
 	console.log("mongo db connection ok.");
 });
 
-var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'});
+/*var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'});
 console.log(user1.date);
-user1.save();
+user1.save();*/
 
 /**
  * Redirects from HTTP to HTTPS
