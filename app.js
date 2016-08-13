@@ -24,13 +24,7 @@ app.set('view engine', 'jade');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
-/*
-* Body-parser should be disabled for default
-* due to error on reading JWT Token
-* by lkaybob
-*/
-
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -72,7 +66,7 @@ redirectApp.use('*', function(req, res){
 /**
  * ERROR HANDLING
  */
-
+/*
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -101,7 +95,6 @@ app.use(function(err, req, res, next) {
   res.render('error', {
     message: err.message,
     error: {}
-  });
-});
-
+  });});
+*/
 module.exports = app;

@@ -56,16 +56,46 @@ app.controller('appCtrl',function ($scope, $auth) {
 /**
  * Created by credt on 2016-07-31.
  */
-app.controller('mainCtrl', function ($scope, $auth){
+app.controller('mainCtrl', function ($scope, $auth, $http){
     // for animation
     $scope.pageClass = 'page-main';
 
     $scope.logout = function () {
         firebase.auth().signOut();
     }
+
     $scope.ck = function () {
         alert($auth.checkSignedIn());
+        $scope.postCheck();
     };
+
+    /**
+     * Post 보내는 상황을 가정하고 스크립트 짜봄
+     * firebase.auth().currentUser.getToken을 미들웨어 삼아
+     * 토큰이랑 내용물만 보내면 됨
+     * 다만, 앵귤러 http 서비스는 http를 기본적으로 사용하기 때문에
+     * https 프로토콜을 명시해줘야함
+     */
+    $scope.postCheck = function(){
+        firebase.auth().currentUser.getToken(false).then(function(idToken){
+            /**
+             * 사용자 정보는 jwt만 포함해주면 됨
+             * body에 내용만 실어서 보내버리면 끝!
+             */
+            var input = {
+                jwt: idToken,
+                body: "Hey folks"
+            };
+            $http.post('https://localhost:3000/send', input).success(function(response){
+                console.log(response);
+            }).error(function(error){
+                console.log(error);
+            });
+        }).catch(function(error){
+            console.log(error);
+            // Handle error
+        });
+    }
 });
 
 app.directive('modal', function () {
