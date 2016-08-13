@@ -4,6 +4,7 @@
 <meta name = "viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset = "euc-kr">
 <title>지도 그리기</title>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script> 
 var markers = [];
@@ -93,6 +94,8 @@ function GeoLocationControl(controlDiv, map, geoOptions, locations){
 		   
 		    // Setup the click event listeners to geolocate user
 		    controlUI.addEventListener('click', function(){
+		    
+		    	console.log("1");
 		    	clearMarkers();
 		       	geoLocate(geoOptions,locations);
 		    });
@@ -103,6 +106,7 @@ function geoLocate(geoOptions,locations){
 		
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			
+			console.log("2");
 			// 현재 위경도 값(GPS) 변수에 넣기.
 			var latitude = pos.coords.latitude;
 			var longitude = pos.coords.longitude;
@@ -125,7 +129,7 @@ function geoLocate(geoOptions,locations){
 				//position: new google.maps.LatLng(37.2834866,127.0447932),
 				map: map,
 				draggable: false,
-				icon: "http://maps.google.com/mapfiles/ms/micons/man.png"
+				icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
 			});
 			
 			map.setCenter(new google.maps.LatLng(latitude,longitude));
