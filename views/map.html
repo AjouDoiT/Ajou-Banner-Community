@@ -6,7 +6,7 @@
 <title>지도 그리기</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script> 
+<script>
 var markers = [];
 var cityCircle;
 var myPosition;
@@ -21,7 +21,7 @@ function initialize(){
 		               	  lng : 126.940675,
 		               	  title: "샘모루 초등학교",
 		               	  info: "<strong>Elemetary School<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"},
-		               	 {lat : 37.399269, 
+		               	 {lat : 37.399269,
 			              lng : 126.938223,
 			              title: "세븐일레븐",
 			              info: "<strong>Eleven of Seven<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"},
@@ -36,9 +36,9 @@ function initialize(){
 			           	  {lat : 37.2843606,
 			           	   lng : 127.0444535,
 			           	   title: "아주대 팔달관",
-			           	   info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"}			             
+			           	   info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"}
 			             ];
-		  		
+
 		var mapOptions = {
 				zoom: zoomLevel,
 				center: new google.maps.LatLng(37.2834866,127.0447932),
@@ -48,24 +48,24 @@ function initialize(){
 				scaleControl : true,
 				streetViewControl : false,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
-				
+
 		}
-		
+
 		var geoOptions = {
 				enableHighAccuracy: true,
 				maximumAge : 0
 		};
-		
+
 		map = new google.maps.Map(document.getElementById('map'),mapOptions);
-		
-		
+
+
 		var geoLocationDiv = document.createElement('div');
 		var geoLocationControl = new GeoLocationControl(geoLocationDiv,map,geoOptions,locations);
 		map.controls[google.maps.ControlPosition.TOP_CENTER].push(geoLocationDiv);
 		geoLocate(geoOptions,locations);
-		
+
 		}
-		
+
 function GeoLocationControl(controlDiv, map, geoOptions, locations){
 
 		    // Set CSS for the control button
@@ -91,26 +91,26 @@ function GeoLocationControl(controlDiv, map, geoOptions, locations){
 		    controlText.style.marginTop = '8px';
 		    controlText.innerHTML = '현재 위치 찾기';
 		    controlUI.appendChild(controlText);
-		   
+
 		    // Setup the click event listeners to geolocate user
 		    controlUI.addEventListener('click', function(){
-		    
+
 		    	console.log("1");
 		    	clearMarkers();
 		       	geoLocate(geoOptions,locations);
 		    });
 }
-		
+
 function geoLocate(geoOptions,locations){
 	if (navigator.geolocation) {
-		
+
 		navigator.geolocation.getCurrentPosition(function (pos) {
-			
+
 			console.log("2");
 			// 현재 위경도 값(GPS) 변수에 넣기.
 			var latitude = pos.coords.latitude;
 			var longitude = pos.coords.longitude;
-			
+
 			cityCircle = new google.maps.Circle({
 				center: new google.maps.LatLng(latitude,longitude),
 				//center: new google.maps.LatLng(37.2834866,127.0447932) ,
@@ -121,7 +121,7 @@ function geoLocate(geoOptions,locations){
 				fillColor: "#808080",
 				fillOpacity: 0.5
 			});
-			
+
         	cityCircle.setMap(map);
 			// 현재 위치에 마커 생성
 			myPosition = new google.maps.Marker({
@@ -131,18 +131,18 @@ function geoLocate(geoOptions,locations){
 				draggable: false,
 				icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
 			});
-			
+
 			map.setCenter(new google.maps.LatLng(latitude,longitude));
-			
+
 			console.log(latitude + longitude);
-			
+
 			//반경500m 이내의 마커만 표시하기
 			for(index in locations){
 				if(Math.pow(Math.abs(latitude*100000 - locations[index].lat*100000),2)+
 						Math.pow(Math.abs(longitude*100000 - locations[index].lng*100000),2)<62500)addMarker(locations[index]);
-				
-			};				
-			
+
+			};
+
 			function addMarker(data){
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(data.lat,data.lng),
@@ -155,13 +155,13 @@ function geoLocate(geoOptions,locations){
 				var contentString = data.info;
 				var infowindow = new google.maps.InfoWindow({content: contentString});
 				google.maps.event.addListener(marker,"click",function(){
-					
+
 					infowindow.open(map,marker);
 				});
 			};
-			
-		
-					
+
+
+
 		}, function (error) {
 			switch (error.code) {
 			case 1:
@@ -189,9 +189,9 @@ function clearMarkers() {
 	  }
 	  cityCircle.setMap(null);
 	  myPosition.setMap(null);
-	  
+
 }
-		
+
 </script>
 </head>
 <body onload = "initialize()">
