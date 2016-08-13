@@ -39,7 +39,7 @@ app.controller('appCtrl',function ($scope, $auth) {
     $auth.setScopeOnAuthStateChange($scope);
 
     // modal ctrl
-    $scope.showModal = false;
+    $scope.default = true;
     $scope.$on('$viewContentLoaded', function() {
         //call it here
        $scope.showModal = !$auth.checkSignedIn();
@@ -131,5 +131,4 @@ app.controller('bannerCtrl', function ($scope) {
     banner2.date = "15:11";
 
     $scope.banners = [banner1, banner2];
-
 });
