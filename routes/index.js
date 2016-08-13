@@ -25,23 +25,19 @@ firebase.initializeApp({
 	databaseURL: "https://ajoubannercom.firebaseio.com"
 });
 
-/* GET layout  page. */
-router.get('/banner', function (req, res, next){
-    res.render('banner');
-});
-
-router.get('/map',function (req, res, next) {
-    res.render('map');
-});
-
-router.get('/main', function (req, res, next){
-    res.render('main');
-});
 
 /* GET layout  page. */
 router.get('/', function(req, res, next) {
-    res.render('layout')
+	res.render('layout');
 });
+router.get('/map', function(req, res, next) {
+	res.render('map');
+});
+
+router.get('/about',function (req, res, next) {
+	res.render('about');
+});
+
 
 /*
  * Sample Code to check idToken

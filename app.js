@@ -42,13 +42,6 @@ app.use('/', routes);
  */
 
 
-/*mongoose.createConnection('mongodb://aws.lkaybob.pe.kr/ABCproject',function (err){
-    if(err) {
-        console.log('MongoDB connection error. ' + err);
-        return;
-    }
-    console.log("MongoDB connection is successfully created.")
-});*/
 mongoose.connect('mongodb://aws.lkaybob.pe.kr/ABCproject');
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error'));
