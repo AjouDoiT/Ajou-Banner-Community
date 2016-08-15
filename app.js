@@ -15,7 +15,7 @@ var redirectApp = express();
 
 var mongoose = require('mongoose');
 var Post = require('./model/post');
-var dbroutes = require('./routes/db')(app,Post);
+require('./routes/db')(app);
 
 
 app.set('views', path.join(__dirname, 'views'));
