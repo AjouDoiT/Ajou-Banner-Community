@@ -36,6 +36,12 @@ html(lang='ko')
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCLtlT689HE_h3GylLm-XKe8Uahz6YJQjU')
 
 body(ng-app='app', ng-controller='appCtrl')
+        script.
+            function signOut(){
+                firebase.auth().signOut();
+                $('#modal').modal('show');
+            }
+
         // Navigation
         nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
             .container
@@ -64,10 +70,12 @@ body(ng-app='app', ng-controller='appCtrl')
                                     a(href='#', ng-click='menuClick()') Contact
                                 li
                                     a(href='#', ng-click='menuClick()') FAQ
+                                li
+                                    a(href='#', onclick='signOut()') Log Out
                 // /.navbar-collapse
             // /.container
         //login modal
-        modal(visible='showModal && default')
+        modal(id='modal' visible='showModal && default')
             .container
                 button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
                     span(class="fa fa-facebook")
