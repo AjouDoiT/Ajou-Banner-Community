@@ -1,0 +1,17 @@
+.page-banner.ng-enter,
+.page-banner.ng-leave {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.page-banner.ng-enter {
+    left: 100%;
+}
+.page-banner.ng-enter-active {
+    left: 0;
+}
+.page-banner.ng-leave {
+    left: 0;
+}
+.page-banner.ng-leave-active {
+    left: -100%;
+}
