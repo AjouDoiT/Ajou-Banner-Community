@@ -1,9 +1,8 @@
-
 script.
   var markers = [];
   var cityCircle;
   var myPosition;
-  function mapInitialize(){
+  function initialize(){
     var zoomLevel = 16;
     var geocoder = new google.maps.Geocoder();
     var gps = navigator.geolocation;
@@ -28,7 +27,17 @@ script.
       {lat : 37.2843606,
         lng : 127.0444535,
         title: "아주대 팔달관",
-        info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"}
+        info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
+       {lat: 37.279366,
+        lng: 127.043505,
+        title: "나인어클락",
+        info: "<strong>Nine O'clock<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
+        {
+            lat: 37.279060,
+            lng: 127.043549,
+            title: "굿커피",
+            info: "<strong>Good Coffee<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"
+        }
     ];
     var mapOptions = {
       zoom: zoomLevel,
@@ -107,7 +116,8 @@ script.
           icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
         });
         map.setCenter(new google.maps.LatLng(latitude,longitude));
-        console.log(latitude + longitude);
+        console.log(latitude);
+        console.log(longitude);
         //반경500m 이내의 마커만 표시하기
         for(index in locations){
           if(Math.pow(Math.abs(latitude*100000 - locations[index].lat*100000),2)+
@@ -119,7 +129,7 @@ script.
             map: map,
             title: data.title,
             draggable:false,
-            animation: google.maps.Animation.BOUNCE
+            animation: google.maps.Animation.DROP
           });
           markers.push(marker);
           var contentString = data.info;
@@ -155,5 +165,5 @@ script.
     cityCircle.setMap(null);
     myPosition.setMap(null);
   }
-  window.onload = mapInitialize();
+  window.onload = initialize();
 #map(style='width:100%; height:300px;')
