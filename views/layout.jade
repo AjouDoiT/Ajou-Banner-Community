@@ -67,7 +67,7 @@ body(ng-app='app', ng-controller='appCtrl')
                 // /.navbar-collapse
             // /.container
         //login modal
-        modal(visible='showModal && default')
+        modal(id='modal' visible='showModal && default')
             .container
                 button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
                     span(class="fa fa-facebook")
