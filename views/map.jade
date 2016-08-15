@@ -1,9 +1,9 @@
-script(src='https://maps.googleapis.com/maps/api/js?sensor=false')
+
 script.
   var markers = [];
   var cityCircle;
   var myPosition;
-  function initialize(){
+  function mapInitialize(){
     var zoomLevel = 16;
     var geocoder = new google.maps.Geocoder();
     var gps = navigator.geolocation;
@@ -155,5 +155,5 @@ script.
     cityCircle.setMap(null);
     myPosition.setMap(null);
   }
-  window.onload = initialize();
+  window.onload = mapInitialize();
 #map(style='width:100%; height:300px;')
