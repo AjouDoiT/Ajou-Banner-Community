@@ -1,4 +1,3 @@
-script(src='https://maps.googleapis.com/maps/api/js?sensor=false')
 script.
   var markers = [];
   var cityCircle;
@@ -107,7 +106,8 @@ script.
           icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
         });
         map.setCenter(new google.maps.LatLng(latitude,longitude));
-        console.log(latitude + longitude);
+        console.log(latitude);
+        console.log(longitude);
         //반경500m 이내의 마커만 표시하기
         for(index in locations){
           if(Math.pow(Math.abs(latitude*100000 - locations[index].lat*100000),2)+

@@ -54,7 +54,6 @@ app.service('$auth', function($route) {
 				// 비정상적인 접근에 대한 로직을 따로 짤 수 있을 것 같음.
 				alert("비정상적인 접근입니다.\n다시 로그인해주세요.");
 				console.error(error);
-
 			}
 		});
 	};
@@ -62,11 +61,11 @@ app.service('$auth', function($route) {
 	this.setScopeOnAuthStateChange = function ($scope) {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-				//alert("b");
+				alert("b");
 				$scope.state = user.displayName;
 				$scope.showModal = false;
 				// currentUser 객체는 global하게 접근 가능!
-				$route.reload();
+				$('#modal').modal('hide');
 				// 현 사용자 정보가 메인 페이지에
 				// 적용될 수 있게 스크립트만 짜주면 될 듯
 				currentUser = {
