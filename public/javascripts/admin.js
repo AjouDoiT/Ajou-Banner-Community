@@ -2,16 +2,16 @@
  * Created by credt on 2016-08-15.
  */
 
-var app = angular.module("admin", []);
+var app = angular.module("adminApp", []);
 
 
-app.service('AdminSvc', function ($http){
+app.service('AjaxSvc', function ($http){
     // separate http service code from app controller code using angularJS service.
     this.fetch = function (){
-        return $http.get('api/admin/spot');
+        return $http.get('/admin/location');
     };
-    this.create = function(post){
-        return $http.post('api/admin/spot', post);
+    this.create = function(data){
+        return $http.post('/admin/location',data);
     };
 });
 
@@ -19,10 +19,10 @@ app.controller('adminCtrl', function ($scope, AjaxSvc) {
     AjaxSvc.fetch().then(function(data) {
         $scope.locations = data.data;
     },function (err) {
-        alert('[ERROR] please see console.');
+        alert('[ERROR] please see console.' + err);
         console.log(err);
-    })
-    $scope.addPost = function () {
+    });
+    $scope.addLocation = function () {
         if ($scope.location_id.trim() &&
             $scope.location_info.trim() &&
             $scope.location_title.trim() &&
@@ -30,15 +30,30 @@ app.controller('adminCtrl', function ($scope, AjaxSvc) {
             $scope.location_lng.trim()) { // if postBody(input string) is exits
             // trim() removes addtional blank space in string's tail
 
-            AdminSvc.create({
-                username: UserSvc.getUser().username,
-                body: $scope.postBody
-            })
+            var data = {
+                location_id:  $scope.location_id,
+                location_lat: $scope.location_lat,
+                location_lng : $scope.location_lng,
+                location_title:    $scope.location_title,
+                location_info :   $scope.location_info
+            };
+            AjaxSvc.create(data)
                 .then(function (res){ // if it success.
-                    $scope.posts.unshift(res.data);
-                    $scope.postBody = null;// clear input box
+                    var element = {
+                        id :res.body.location_id,
+                        info : location_info,
+                        lng : location_lng,
+                        title : location_title,
+                        lat : location_lat
+                    };
+                    $scope.locations.unshift(element);
+                    $scope.location_id="";
+                    $scope.location_info= "";
+                    $scope.location_title="";
+                    $scope.location_lat="";
+                    $scope.location_lng="";
                 },function(err){ // if it failed.
-                    $scope.posts.splice(0,1);
+                    alert('[ERROR] please see console.' + err);
                     console .log(err);
                 });
         }

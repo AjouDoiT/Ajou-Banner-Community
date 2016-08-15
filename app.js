@@ -31,11 +31,14 @@ app.use(logger('dev'));
 * by lkaybob
 */
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/admin', require('./routes/admin'));
 app.use('/', routes);
+
 /**
  * DataBase HANDLING
  * by. FrogAhn
