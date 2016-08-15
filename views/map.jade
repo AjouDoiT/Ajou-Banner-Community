@@ -27,7 +27,17 @@ script.
       {lat : 37.2843606,
         lng : 127.0444535,
         title: "아주대 팔달관",
-        info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"}
+        info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
+       {lat: 37.279366,
+        lng: 127.043505,
+        title: "나인어클락",
+        info: "<strong>Nine O'clock<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
+        {
+            lat: 37.279060,
+            lng: 127.043549,
+            title: "굿커피",
+            info: "<strong>Good Coffee<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"
+        }
     ];
     var mapOptions = {
       zoom: zoomLevel,
@@ -119,7 +129,7 @@ script.
             map: map,
             title: data.title,
             draggable:false,
-            animation: google.maps.Animation.BOUNCE
+            animation: google.maps.Animation.DROP
           });
           markers.push(marker);
           var contentString = data.info;
