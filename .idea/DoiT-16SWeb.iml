@@ -10,6 +10,6 @@
     <orderEntry type="library" name="Dev-credt node_modules" level="project" />
     <orderEntry type="library" name="angular" level="application" />
     <orderEntry type="library" name="firebase" level="application" />
-
+    <orderEntry type="library" name="gitHub node_modules" level="project" />
   </component>
 </module>
