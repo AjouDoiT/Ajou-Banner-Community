@@ -15,7 +15,7 @@ var redirectApp = express();
 
 var mongoose = require('mongoose');
 var Post = require('./model/post');
-var dbroutes = require('./routes/db')(app,Post);
+require('./routes/db')(app);
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -42,13 +42,6 @@ app.use('/', routes);
  */
 
 
-/*mongoose.createConnection('mongodb://aws.lkaybob.pe.kr/ABCproject',function (err){
-    if(err) {
-        console.log('MongoDB connection error. ' + err);
-        return;
-    }
-    console.log("MongoDB connection is successfully created.")
-});*/
 mongoose.connect('mongodb://aws.lkaybob.pe.kr/ABCproject');
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error'));
@@ -56,9 +49,9 @@ db.once('open',function callback(){
 	console.log("mongo db connection ok.");
 });
 
-var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'});
+/*var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'});
 console.log(user1.date);
-user1.save();
+user1.save();*/
 
 /**
  * Redirects from HTTP to HTTPS

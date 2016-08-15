@@ -2,6 +2,7 @@
  * Created by ss on 07/20/2016
  * routing for data
  */
+var Post = require('../model/post');
 
 module.exports = function(app,Post){
 	//Get all posts
@@ -13,8 +14,8 @@ module.exports = function(app,Post){
 	}); 
 	
 	//Get posts by id
-	app.get('/freeboard/posts/id',function(req,res){
-		Post.find({username: req.params.username},{_id:0, username:1,body:1,date:1},function(err,posts){
+	app.get('/freeboard/posts/body',function(req,res){
+		Post.find({body: req.params.body},{_id:0, username:1,body:1,date:1},function(err,posts){
 			if(err) return res.status(500).json({error:err});
 			if(posts.length ===0 ) return res.status(404).json({error: "It doesn't match with any posts"});
 			res.json(posts);
@@ -24,7 +25,7 @@ module.exports = function(app,Post){
 	//Create post
 	app.post('/freeboard/posts',function(req,res){
 		var post = new Post();
-		post.uid = req.body.uid;
+		post.profile = req.body.profile;
 		post.username = req.body.username;
 		post.body = req.body.body;
 		post.date = Date.now();
