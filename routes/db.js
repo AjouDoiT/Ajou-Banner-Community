@@ -2,8 +2,9 @@
  * Created by ss on 07/20/2016
  * routing for data
  */
+var Post = require('../model/post');
 
-module.exports = function(app,Post){
+module.exports = function(app){
 	//Get all posts
 	app.get('/freeboard/posts',function(req,res){
 		Post.find(function(err,posts){
