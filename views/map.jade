@@ -2,43 +2,13 @@ script.
   var markers = [];
   var cityCircle;
   var myPosition;
+
   function initialize(){
     var zoomLevel = 16;
     var geocoder = new google.maps.Geocoder();
     var gps = navigator.geolocation;
     var markerMaxWidth = 300;
-    var locations = [
-      {lat : 37.399631,
-        lng : 126.940675,
-        title: "샘모루 초등학교",
-        info: "<strong>Elemetary School<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"},
-      {lat : 37.399269,
-        lng : 126.938223,
-        title: "세븐일레븐",
-        info: "<strong>Eleven of Seven<strong><br/><a href='http://portal.ajou.ac.kr' target=_blank>portal</a>"},
-      {lat : 37.405475,
-        lng : 126.971419,
-        title : "할리스커피 동편점",
-        info: "<strong>Hollys Coffee<strong><br/><a href = 'http://www.hollys.co.kr' target=_blank>portal to hollys</a>"},
-      {lat : 37.2821419,
-        lng : 127.0462701,
-        title: "아주대 율곡관",
-        info: "<strong>아주대 율곡관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
-      {lat : 37.2843606,
-        lng : 127.0444535,
-        title: "아주대 팔달관",
-        info: "<strong>아주대 팔달관<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
-       {lat: 37.279366,
-        lng: 127.043505,
-        title: "나인어클락",
-        info: "<strong>Nine O'clock<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"},
-        {
-            lat: 37.279060,
-            lng: 127.043549,
-            title: "굿커피",
-            info: "<strong>Good Coffee<strong><br/><a href = 'http://portal.ajou.ac.kr' target=_blank>portal</a>"
-        }
-    ];
+    var locations = JSON.parse(!{JSON.stringify(Locations)});
     var mapOptions = {
       zoom: zoomLevel,
       center: new google.maps.LatLng(37.2834866,127.0447932),
@@ -116,8 +86,10 @@ script.
           icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
         });
         map.setCenter(new google.maps.LatLng(latitude,longitude));
+          //map.setCenter(new google.maps.LatLng(37.2834866,127.0447932));
         console.log(latitude);
         console.log(longitude);
+
         //반경500m 이내의 마커만 표시하기
         for(index in locations){
           if(Math.pow(Math.abs(latitude*100000 - locations[index].lat*100000),2)+
@@ -125,7 +97,7 @@ script.
         };
         function addMarker(data){
           var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(data.lat,data.lng),
+            position: new google.maps.LatLng(data.latitude,data.longitude),
             map: map,
             title: data.title,
             draggable:false,
