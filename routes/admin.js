@@ -35,15 +35,19 @@ var toObjectSource = function(obj)   {
         }
     }
     return str + "]";
-}
+};
+router.delete('/location', function (req, res, next){
+    Location.find({_id : req.query._id}).remove(function (data){
+        res.status(201).json(data);
+    })
+});
 router.post('/location', function (req, res, next) {
-
     var location = new Location({
-        location_id:  req.body.location_id  ,
-        latitude: req.body.location_lat,
-        longitude: req.body.location_lng,
-        title:    req.body.location_title,
-        info:   req.body.location_info
+        location_id:  req.body.location_id,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        title:    req.body.title,
+        info:   req.body.info
     }); // create post using Post model from models/posts.js
 
     location.save(function (err, data) {
@@ -52,14 +56,15 @@ router.post('/location', function (req, res, next) {
         } // in event-oriented lang like node,
         // exception handling is hard to handle. So express uses next
         // design next like above code.
-        res.json(201, data);
+        res.status(201).json(data);
         // it dose not have to return 'post' json, but this is preferred when
         // app needs server-generated data like _id field or Date.
-    })
+    }) 
 });
 router.get('/', function (req, res, next) {
     res.render('admin');
 });
+
 
 
 module.exports = router;

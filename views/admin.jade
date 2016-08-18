@@ -23,23 +23,27 @@ html
                     input.form-control(ng-model='location_id')
                     div
                         strong Title
-                    input.form-control(ng-model='location_title')
+                    input.form-control(ng-model='title')
                     div
-                        strong Info
-                    input.form-control(ng-model='location_info')
+                        strong Info (You can use html code directly)
+                    input.form-control(ng-model='info')
                     div
                         strong lat
-                    input.form-control(ng-model='location_lat')
+                    input.form-control(ng-model='latitude')
                     div
                         strong lng
-                    input.form-control(ng-model='location_lng')
+                    input.form-control(ng-model='longitude')
                     .input-group-btn.container
                         button.btn.btn-default(ng-click='addLocation()') Add Location
         ul.list-group
             li.list-group-item(ng-repeat='location in locations')
-                span
                     strong
-                        | {{location.id}} {{location.title}} {{location.info}} {{location.lat}} {{location.lng}}
+                        | ID : {{location.location_id}} title : {{location.title}} lat :  {{location.latitude}} lng : {{location.longitude}}
+                    .container
+                        strong info :
+                        .container(ng-bind-html='location.info | sanitize')
+                    span
+                     a(ng-click='deleteLocation($index)') delete
         script(src='https://code.jquery.com/jquery-latest.min.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
         script(src='javascripts/admin.js')
