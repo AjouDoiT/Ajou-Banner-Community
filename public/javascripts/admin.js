@@ -69,7 +69,6 @@ app.controller('adminCtrl', function ($scope, AjaxSvc) {
         }
     }
     $scope.deleteLocation = function ($index){
-        //alert($scope.locations[index]._id);
         AjaxSvc.delete($scope.locations[$index]._id)
             .then(function(data){
                 $scope.locations.splice($index, 1);
