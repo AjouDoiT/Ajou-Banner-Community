@@ -7,6 +7,8 @@ var app = angular.module("app", ['ngRoute', 'ngAnimate']);
 app.config(function($routeProvider) {
     $routeProvider
         .when("/", {templateUrl : "map", controller: 'mapCtrl'})
+        .when("/home", {templateUrl : "map", controller: 'mapCtrl'})
+        .when("/map", {templateUrl : "map", controller: 'mapCtrl'})
         .when("/about", {templateUrl : "about", controller: 'aboutCtrl'});
 });
 
