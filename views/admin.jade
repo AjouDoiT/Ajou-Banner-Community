@@ -1,0 +1,49 @@
+//
+   Created by credt on 2016-08-15.
+
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title ABC admin
+        // BOOTSTRAP
+        // Latest compiled and minified CSS
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+        // jQuery library
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+        // Latest compiled JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+        // BOOTSTRAP
+    body(ng-app='adminApp', ng-controller='adminCtrl')
+        form(role='form')
+            .form-group.container-fluid
+                .input-group.container
+                    div
+                        strong Location ID
+                    input.form-control(ng-model='location_id')
+                    div
+                        strong Title
+                    input.form-control(ng-model='title')
+                    div
+                        strong Info (You can use html code directly)
+                    input.form-control(ng-model='info')
+                    div
+                        strong lat
+                    input.form-control(ng-model='latitude')
+                    div
+                        strong lng
+                    input.form-control(ng-model='longitude')
+                    .input-group-btn.container
+                        button.btn.btn-default(ng-click='addLocation()') Add Location
+        ul.list-group
+            li.list-group-item(ng-repeat='location in locations')
+                    strong
+                        | ID : {{location.location_id}} title : {{location.title}} lat :  {{location.latitude}} lng : {{location.longitude}}
+                    .container
+                        strong info :
+                        .container(ng-bind-html='location.info | sanitize')
+                    span
+                     a(ng-click='deleteLocation($index)') delete
+        script(src='https://code.jquery.com/jquery-latest.min.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+        script(src='javascripts/admin.js')

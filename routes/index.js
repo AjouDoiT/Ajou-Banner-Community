@@ -3,7 +3,7 @@ var firebase = require('firebase');
 var bodyParser = require('body-parser');
 var path = require('path');
 var router = express.Router();
-
+var Location = require('../model/location');
 /*
  * Service Account information needed to
  * access Firebase Project remotely
@@ -31,8 +31,15 @@ router.get('/', function(req, res, next) {
 	res.render('layout');
 });
 
+router.get('/banner', function(req, res, next) {
+	res.render('banner');
+});
+
 router.get('/map', function(req, res, next) {
-	res.render('map');
+    Location.find(function(err,locations){
+        if(err) return res.status(500).send({error: 'Database failure'});
+        res.render('map',{Locations: JSON.stringify(locations)});
+    })
 });
 
 router.get('/about',function (req, res, next) {
