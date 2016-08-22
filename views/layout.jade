@@ -46,6 +46,18 @@ html(lang='utf-8')
         link(href='stylesheets/font-awesome.min.css', rel='stylesheet', type='text/css')
 
     body(ng-app='app', ng-controller='appCtrl')
+
+        /////////// loading splash and login page
+        div(id='loader-wrapper')
+                div(class='loader-cover')
+                    h1(class='loader-content') Ajou Banner Community
+                    div(id='socialLogin')
+                        button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
+                            span(class="fa fa-facebook")
+                            | Sign in with Facebook
+                    div(id='img-wrapper')
+                        img(class='loader-content' src='loader.gif')
+        ////////////
         // Entire Layout
         .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
             // Page Top Header

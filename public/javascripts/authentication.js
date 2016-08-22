@@ -75,7 +75,7 @@ app.service('$auth', function($route) {
 			}
 			else {
 				//$scope.showModal = true;
-				$scope.state = "";
+				angular.element('#loader-wrapper').fadeIn(500);
 				$route.reload();
 				// 로그아웃이 됐을 경우의 로직
 				// index.html(메인페이지 화면)으로 redirect하게
