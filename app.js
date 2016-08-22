@@ -4,10 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs');
+//var fs = require('fs');
 var http = require('http');
 
 var routes = require('./routes/index');
+
 
 var app = express();
 var redirectApp = express();
@@ -35,6 +36,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/admin', require('./routes/admin'));
 app.use('/', routes);
 /**
  * DataBase HANDLING

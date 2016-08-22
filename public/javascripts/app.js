@@ -95,6 +95,9 @@ app.directive('modal', function () {
 
 app.controller('mapCtrl',function ($scope) {
     $scope.pageClass = 'page-map';
+    $scope.goToBanner = function () {
+        
+    }
 });
 
 app.controller('aboutCtrl',function ($scope) {

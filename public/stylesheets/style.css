@@ -1,4 +1,4 @@
-ng-view {
+.ng-view {
     position: relative;
     top: 51px;
 }
