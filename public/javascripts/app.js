@@ -8,7 +8,7 @@ app.config(function($routeProvider) {
     $routeProvider
         .when("/", {templateUrl : "map", controller: 'mapCtrl'})
         .when("/about", {templateUrl : "about", controller: 'aboutCtrl'});
-});
+}); 
 
 app.controller('appCtrl',function ($scope, $auth) {
     angular.element("#toggleButton").addClass("collapsed");

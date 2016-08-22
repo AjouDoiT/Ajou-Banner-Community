@@ -15,7 +15,7 @@ var redirectApp = express();
 
 var mongoose = require('mongoose');
 var Post = require('./model/post');
-require('./routes/db')(app);
+var dbroutes = require('./routes/db')(app,Post);
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -31,11 +31,14 @@ app.use(logger('dev'));
 * by lkaybob
 */
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/admin', require('./routes/admin'));
 app.use('/', routes);
+
 /**
  * DataBase HANDLING
  * by. FrogAhn
@@ -70,6 +73,7 @@ redirectApp.use('*', function(req, res){
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -81,6 +85,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+    console.log(err.message);
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -93,6 +98,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  console.log(err.message);
   res.render('error', {
     message: err.message,
     error: {}

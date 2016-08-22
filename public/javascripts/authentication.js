@@ -61,7 +61,6 @@ app.service('$auth', function($route) {
 	this.setScopeOnAuthStateChange = function ($scope) {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-				alert("b");
 				$scope.state = user.displayName;
 				$scope.showModal = false;
 				// currentUser 객체는 global하게 접근 가능!
