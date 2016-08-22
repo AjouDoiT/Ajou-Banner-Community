@@ -241,6 +241,6 @@ _:-ms-input-placeholder, :root .demo-graph {
 
 .main-view{
     position: absolute;
-    width: calc(100% - 50px);
-    height: calc(100% - 50px);
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
 }
