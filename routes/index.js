@@ -30,6 +30,7 @@ firebase.initializeApp({
 router.get('/', function(req, res, next) {
 	res.render('layout');
 });
+
 router.get('/map', function(req, res, next) {
 	res.render('map');
 });
