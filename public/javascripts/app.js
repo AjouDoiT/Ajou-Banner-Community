@@ -73,7 +73,7 @@ app.controller('mapCtrl', function ($scope, $compile){
     var myPosition;
 
     function initialize() {
-        var zoomLevel = 16;
+        var zoomLevel = 17;
         var geocoder = new google.maps.Geocoder();
         var gps = navigator.geolocation;
         var markerMaxWidth = 300;
@@ -157,13 +157,13 @@ app.controller('mapCtrl', function ($scope, $compile){
                 });
                 map.setCenter(new google.maps.LatLng(latitude, longitude));
                 //map.setCenter(new google.maps.LatLng(37.2834866,127.0447932));
-                console.log(latitude);
-                console.log(longitude);
+                console.log("위도"+latitude);
+                console.log("경도"+longitude);
 
                 //반경500m 이내의 마커만 표시하기
                 for (index in locations) {
-                    if (Math.pow(Math.abs(latitude * 100000 - locations[index].lat * 100000), 2) +
-                        Math.pow(Math.abs(longitude * 100000 - locations[index].lng * 100000), 2) < 62500);
+                    if (Math.pow(Math.abs(latitude * 100000 - locations[index].latitude * 100000), 2) +
+                        Math.pow(Math.abs(longitude * 100000 - locations[index].longitude * 100000), 2) < 62500)
                     addMarker(locations[index], index);
                 };
                 function addMarker(data, index) {
