@@ -45,6 +45,7 @@ html(lang='ko')
         // Custom Fonts
         link(href='stylesheets/font-awesome.min.css', rel='stylesheet', type='text/css')
 
+
     body(ng-app='app', ng-controller='appCtrl')
         // Entire Layout
         .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
@@ -58,8 +59,8 @@ html(lang='ko')
                 header.demo-drawer-header
                     .demo-avatar-dropdown
                         // user infomation
-                        img.demo-avatar(src='https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.959.959/13901498_818631218238226_6299824891801431813_n.jpg?oh=e41d031652f4c6bc07915e3c7cf2620d&oe=5810E73C')
-                        span(style='padding-left: 15px; margin-top: 20px') 박명진님
+                        img.demo-avatar(ng-src='{{userPhoto}}')
+                        span(style='padding-left: 15px; margin-top: 20px' ng-bind='name')
                         .mdl-layout-spacer
                         button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon(style='margin-top: 15px')
                             i.material-icons(role='presentation') arrow_drop_down

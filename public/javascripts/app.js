@@ -14,12 +14,6 @@ app.config(function($routeProvider) {
 
 app.controller('appCtrl',function ($scope, $auth) {
     angular.element("#toggleButton").addClass("collapsed");
-    $scope.menuClick = function(){
-        // 작은 화면일 때 메뉴바가 닫히는 기능
-        var button = angular.element("#toggleButton");
-        if (!button.attr('class').includes('collapsed'))
-            button.click();
-    };
 
     $scope.toggleAuth = function(){
         if(!firebase.auth().currentUser){
@@ -37,7 +31,7 @@ app.controller('appCtrl',function ($scope, $auth) {
     };
     // Authentication Initializaiotn
     $auth.init();
-
+    
     $auth.setScopeOnAuthStateChange($scope);
 
     // modal ctrl
@@ -46,11 +40,6 @@ app.controller('appCtrl',function ($scope, $auth) {
         //call it here
        $scope.showModal = !$auth.checkSignedIn();
     });
-  //  $scope.buttonClicked = "";
-  //  $scope.toggleModal = function(btnClicked) {
-  //      $scope.buttonClicked = btnClicked;
-  //      $scope.showModal = !$scope.showModal;
-  //  }
 });
 
 app.directive('modal', function () {

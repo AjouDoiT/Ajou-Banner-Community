@@ -66,13 +66,15 @@ app.service('$auth', function($route) {
 				$scope.showModal = false;
 				// currentUser 객체는 global하게 접근 가능!
 				$('#modal').modal('hide');
-				// 현 사용자 정보가 메인 페이지에
-				// 적용될 수 있게 스크립트만 짜주면 될 듯
+
 				currentUser = {
 					displayName: user.displayName,
 					email: user.email,
 					photoURL: user.photoURL
 				}
+				//display user infomation
+				$scope.name = currentUser.displayName + '님';
+				$scope.userPhoto = currentUser.photoURL;
 			}
 			else {
 				//$scope.showModal = true;
