@@ -31,6 +31,10 @@ router.get('/', function(req, res, next) {
 	res.render('layout');
 });
 
+router.get('/banner', function(req, res, next) {
+	res.render('banner');
+});
+
 router.get('/map', function(req, res, next) {
     Location.find(function(err,locations){
         if(err) return res.status(500).send({error: 'Database failure'});
