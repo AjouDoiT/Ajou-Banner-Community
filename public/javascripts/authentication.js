@@ -74,6 +74,7 @@ app.service('$auth', function($route) {
 					email: user.email,
 					photoURL: user.photoURL
 				}
+				angular.element('#loader-wrapper').fadeOut(500);
 			}
 			else {
 				//$scope.showModal = true;
@@ -82,6 +83,7 @@ app.service('$auth', function($route) {
 				// 로그아웃이 됐을 경우의 로직
 				// index.html(메인페이지 화면)으로 redirect하게
 				// 하면 될 듯
+				angular.element('#loader-wrapper').fadeIn(500);
 			}
 		});
 	}

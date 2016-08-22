@@ -9,7 +9,18 @@ html(lang='ko')
         meta(name='author', content='11안성수, 13계성혁, 13박명진, 15최홍범, 15고대권')
         title AJOU BANNER COMMUNITY
         include head
-body(ng-app='app', ng-controller='appCtrl')
+body(ng-app='app' ng-controller='appCtrl')
+    div(id='loader-wrapper')
+        div(class='loader-cover')
+            h1(class='loader-content') Ajou Banner Community
+            div(id='socialLogin')
+                button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
+                    span(class="fa fa-facebook")
+                    | Sign in with Facebook
+            div(id='img-wrapper')
+                img(class='loader-content' src='ring-alt.gif')
+
+    div(id='content')
         // Navigation
         nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
             .container

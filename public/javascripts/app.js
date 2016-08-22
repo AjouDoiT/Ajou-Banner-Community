@@ -10,7 +10,7 @@ app.config(function($routeProvider) {
         .when("/map", {templateUrl : "map", controller: 'mapCtrl'})
         .when("/banner", {templateUrl : "banner", controller : 'bannerCtrl'});
 });
-app.controller('appCtrl',function ($scope, $auth) {
+app.controller('appCtrl',function ($scope, $auth, $timeout) {
     angular.element("#toggleButton").addClass("collapsed");
     $scope.menuClick = function(){
         // 작은 화면일 때 메뉴바가 닫히는 기능
@@ -49,6 +49,13 @@ app.controller('appCtrl',function ($scope, $auth) {
   //      $scope.buttonClicked = btnClicked;
   //      $scope.showModal = !$scope.showModal;
   //  }
+
+    $timeout(function(){
+        if(!firebase.auth().currentUser){
+            angular.element('#img-wrapper').fadeOut(500);
+            angular.element('#socialLogin').fadeIn(500);
+        }
+    }, 1500);
 
 
 });
