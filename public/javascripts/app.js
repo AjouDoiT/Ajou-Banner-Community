@@ -52,8 +52,9 @@ app.controller('appCtrl',function ($scope, $auth, $timeout) {
 
     $timeout(function(){
         if(!firebase.auth().currentUser){
-            angular.element('#img-wrapper').fadeOut(500);
-            angular.element('#socialLogin').fadeIn(500);
+            angular.element('#img-wrapper').fadeOut(500, function(){
+                angular.element('#socialLogin').fadeIn(500);
+            });
         }
     }, 1500);
 
