@@ -11,7 +11,7 @@ app.config(function($routeProvider) {
         .when("/banner", {templateUrl : "banner", controller: 'bannerCtrl'});
 });
 
-app.controller('appCtrl',function ($scope, $auth, $timeout) {
+app.controller('appCtrl',function ($scope, $auth) {
 
     $scope.toggleAuth = function(){
         if(!firebase.auth().currentUser){
@@ -44,15 +44,6 @@ app.controller('appCtrl',function ($scope, $auth, $timeout) {
   //      $scope.buttonClicked = btnClicked;
   //      $scope.showModal = !$scope.showModal;
   //  }
-
-
-    $timeout(function(){
-        if(!firebase.auth().currentUser){
-            angular.element('#img-wrapper').fadeOut(500, function(){
-                angular.element('#socialLogin').fadeIn(500);
-            });
-        }
-    }, 1500);
 
 });
 
