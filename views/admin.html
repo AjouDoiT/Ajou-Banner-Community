@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>ABC admin</title>
+
+    <!-- BOOTSTRAP -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!--BOOTSTRAP-->
+
+</head>
+<body ng-app="admin", ng-controller="adminCtrl">
+<form role="form">
+    <div class="form-group container-fluid">
+        <div class="input-group container">
+            <div><strong>Location ID</strong></div>
+            <input ng-model="location_id" class="form-control"/>
+            <div><strong>Title</strong></div>
+            <input ng-model="location_title" class="form-control"/>
+            <div><strong>Info</strong></div>
+            <input ng-model="location_info" class="form-control"/>
+            <div><strong>lat</strong></div>
+            <input ng-model="location_lat" class="form-control"/>
+            <div><strong>lng</strong></div>
+            <input ng-model="location_lng" class="form-control"/>
+
+            <div class="input-group-btn container">
+                <button ng-click='addLocation()' class='btn btn-default'>Add Location</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<ul class='list-group'>
+    <li ng-repeat="location in locations" class='list-group-item'>
+        <span><strong>{{location.id}} {{location.title}} {{location.info}} {{location.lat}} {{location.lng}}</strong></span>
+    </li>
+</ul>
+
+<script src='https://code.jquery.com/jquery-latest.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js' ></script>
+<script src='javascripts/admin.js'></script>
+
+</body>
+</html>

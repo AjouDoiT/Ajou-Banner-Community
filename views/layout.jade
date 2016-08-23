@@ -1,66 +1,140 @@
 doctype html
-html(lang='ko')
+html(lang='utf-8')
     head
-        // 반응형 웹을 위한 필수 meta 3개
+        // 반응형 웹을 위한 필수 meta tag 3가지
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        meta(name='description', content='16년 2학기 학술제대비 웹팀')
-        meta(name='author', content='11안성수, 13계성혁, 13박명진, 15최홍범, 15고대권')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0')
         title AJOU BANNER COMMUNITY
-        include head
-body(ng-app='app' ng-controller='appCtrl')
-    div(id='loader-wrapper')
-        div(class='loader-cover')
-            h1(class='loader-content') Ajou Banner Community
-            div(id='socialLogin')
-                button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
-                    span(class="fa fa-facebook")
-                    | Sign in with Facebook
-            div(id='img-wrapper')
-                img(src='loader.gif')
+        // Web Application description and Team Members
+        meta(name='description', content='현재 위치기반 게시판제공 웹앱')
+        meta(name='author', content='11안성수, 13계성혁, 13박명진, 15최홍범, 15고대권')
 
-    div(id='content')
-        // Navigation
-        nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        // Add to homescreen for Chrome on Android
+        //meta(name='mobile-web-app-capable', content='yes')
+        //link(rel='icon', sizes='192x192', href='images/android-desktop.png')
+        // Add to homescreen for Safari on iOS
+        //meta(name='apple-mobile-web-app-capable', content='yes')
+        //meta(name='apple-mobile-web-app-status-bar-style', content='black')
+        //meta(name='apple-mobile-web-app-title', content='Material Design Lite')
+        //link(rel='apple-touch-icon-precomposed', href='images/ios-desktop.png')
+        // Tile icon for Win8 (144x144 + tile color)
+        //meta(name='msapplication-TileImage', content='images/touch/ms-touch-icon-144x144-precomposed.png')
+        //meta(name='msapplication-TileColor', content='#3372DF')
+
+        // Material Design CSS
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
+
+        // ---------------------------------------------------------------------------- 미확인 CSS들 ----------------------------------------------------------------------------
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+        // Custom Fonts
+        link(href='stylesheets/font-awesome.min.css', rel='stylesheet', type='text/css')
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // 이거 지워도 제대로 돌아가는지 확인해보기 Why?? body에도 똑같은게 있어서
+        script(src='https://code.jquery.com/jquery-latest.min.js')
+        // JavaScript for Google Map Api
+        script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDu0DI39SjhOzsPXq_OSv1-LdT3HdfUI8U')
+
+        // ----------------------------------------------------------------------------Custom CSS----------------------------------------------------------------------------
+        // Material Design CSS
+        link(href='stylesheets/MaterialStyle.css', rel='stylesheet')
+        // Animation CSS
+        link(href='stylesheets/animate.css', rel='stylesheet')
+        // LOGIN Modal CSS
+        link(href='stylesheets/style.css', rel='stylesheet')
+
+    body(ng-app='app', ng-controller='appCtrl')
+
+        /////////// loading splash and login page
+        div(id='loader-wrapper')
+                div(class='loader-cover')
+                    h1(class='loader-content') Ajou Banner Community
+                    div(id='socialLogin')
+                        button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
+                            span(class="fa fa-facebook")
+                            | Sign in with Facebook
+                        div(id='loaderInfo')
+                            p 본 서비스는 Facebook 로그인을 하셔야 사용할 수 있습니다.
+                            p 로그인하신 분은 조금만 기다려주세요 :)
+                    div(id='img-wrapper')
+                        img(class='loader-content' src='loader.gif')
+        ////////////
+        // Entire Layout
+        .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
+            // Page Top Header
+            header.demo-header.mdl-layout__header.mdl-color--grey-100.mdl-color-text--grey-600
+                .mdl-layout__header-row
+                    span.mdl-layout-title AJOU Banner Community
+                    .mdl-layout-spacer
+            // Page Left Navbar
+            .demo-drawer.mdl-layout__drawer.mdl-color--blue-grey-900.mdl-color-text--blue-grey-50
+                header.demo-drawer-header
+                    .demo-avatar-dropdown
+                        // user infomation
+                        img.demo-avatar(src='https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.959.959/13901498_818631218238226_6299824891801431813_n.jpg?oh=e41d031652f4c6bc07915e3c7cf2620d&oe=5810E73C')
+                        span(style='padding-left: 15px; margin-top: 20px') 박명진님
+                        .mdl-layout-spacer
+                        button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon(style='margin-top: 15px')
+                            i.material-icons(role='presentation') arrow_drop_down
+                            span.visuallyhidden Accounts
+                        ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='accbtn')
+                            li.mdl-menu__item My Post
+                            li.mdl-menu__item LogOut
+                // Menu bar
+                nav.demo-navigation.mdl-navigation.mdl-color--blue-grey-800
+                    a.mdl-navigation__link(href='/#/')
+                        i.mdl-color-text--blue-grey-400.material-icons(role='presentation') home
+                        | Home
+                    a.mdl-navigation__link(href='/#/about')
+                        i.mdl-color-text--blue-grey-400.material-icons(role='presentation') info
+                        | About
+                    a.mdl-navigation__link(href='/#/banner')
+                        i.mdl-color-text--blue-grey-400.material-icons(role='presentation') map
+                        | Banner
+                    a.mdl-navigation__link(href='')
+                        i.mdl-color-text--blue-grey-400.material-icons(role='presentation') favorite
+                        | Favorite
+                    a.mdl-navigation__link(href='')
+                        i.mdl-color-text--blue-grey-400.material-icons(role='presentation') contacts
+                        | Contact
+                    a.mdl-navigation__link(href='')
+                        i.mdl-color-text--blue-grey-400.material-icons(role='presentation') forum
+                        | FAQ
+                    .mdl-layout-spacer
+            // Page Center Main (Contents Part)
+            main.mdl-layout__content.mdl-color--grey-100.main
+                .mdl-shadow--2dp.mdl-cell--12-col.mdl-grid.main-view
+                    // Page Content
+                    ng-view.page.pageClass(class='{{ }}')
+
+        // login modal
+        modal#modal(visible='showModal && default')
             .container
-                // Brand and toggle get grouped for better mobile display
-                .navbar-header
-                    button.navbar-toggle(id='toggleButton' type='button', data-toggle='collapse',
-                            data-target='#bs-example-navbar-collapse-1'
-                            ng-init='')
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    // nav의 로고부분
-                    a.navbar-brand(href='/#/' ng-click='menuClick()') A.B.C.
-                // Collect the nav links, forms, and other content for toggling
-                #bs-example-navbar-collapse-1.collapse.navbar-collapse
-                    ul.nav.navbar-nav.navbar-right
-                        li
-                            a(href='/#/map', ng-click='menuClick()') Map
-                        li
-                            a(href='/#/banner', ng-click='menuClick()') Banner
-                        li.dropdown
-                            a.dropdown-toggle(data-toggle='dropdown')
-                                | Others
-                                b.caret
-                            ul.dropdown-menu
-                                li
-                                    a(href='#contact', ng-click='menuClick()') Contact
-                                li
-                                    a(href='#faq', ng-click='menuClick()') FAQ
-                // /.navbar-collapse
-            // /.container
-        //login modal
-        modal(visible='showModal && default')
-            .container
-                button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
-                    span(class="fa fa-facebook")
+                button.btn.btn-social.btn-facebook(ng-click='toggleAuth()')
+                    span.fa.fa-facebook
                     | Sign in with Facebook
 
-        // Page Content
-        ng-view(class='page {{ pageClass }}')
-        .jumbotron {{state}}
+        // "Show Your Location"버튼
+        a#view-source.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored.mdl-color-text--white(href='#', target='_blank')
+            | Show Your Location
 
+        // Material Design for JavaScript
+        script(src='https://code.getmdl.io/1.2.0/material.min.js')
+        // Angular.js and Route for JavaScript
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js')
+        // Firebase for JavaScript
+        script(src='https://www.gstatic.com/firebasejs/3.2.0/firebase.js')
+        // Jquery for JavaScript
+        script(src='https://code.jquery.com/jquery-3.1.0.slim.min.js', integrity='sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=', crossorigin='anonymous')
+        script(src='https://code.jquery.com/jquery-latest.min.js')
+        // Bootstrap Core JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+        // ----------------------------------------------------------------------------Custom JavaScript----------------------------------------------------------------------------
+        script(src='javascripts/app.js')
+        script(src='javascripts/authentication.js')

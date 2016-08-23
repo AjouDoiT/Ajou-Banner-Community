@@ -1,0 +1,30 @@
+.img-center {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: inherit;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: inherit;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: inherit;
+    }
+}
