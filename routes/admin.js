@@ -16,26 +16,6 @@ router.get('/location', function (req, res, next){
             res.json(data);
         });
 });
-var toObjectSource = function(obj)   {
-    if(obj === null)   {
-        return "[null]";
-    }
-    if(obj === undefined) {
-        return "[undefined]";
-    }
-
-    var str = "[";
-    var member = null;
-    for(var each in obj)   {
-        try   {
-            member = obj[each];
-            str += each + "=" + member + ", ";
-        }catch(err) {
-            alert(err);
-        }
-    }
-    return str + "]";
-};
 router.delete('/location', function (req, res, next){
     Location.find({_id : req.query._id}).remove(function (data){
         res.status(201).json(data);

@@ -215,12 +215,25 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope, $loc
 
     initialize();
 });
-
-app.controller('bannerCtrl', function ($scope, $rootScope, $location) {
-    if (!$rootScope.currentLocation){
-        alert("비정상적인 접근입니다.");
+app.service('locationToPostSvc', function (){
+    this.fetchByLocationId = function (id) {
+        return $http.get('/freeboard/posts', {params : {location_id : id}});
+    };
+    this.createByLocationId = function (id) {
+        return ;
+    }
+});
+app.controller('bannerCtrl', function ($scope, $rootScope, $location, locationToPostSvc) {
+    var location;
+    if (!(location = $rootScope.currentLocation)){
+        // if selected location is not exist,
+        // redirect to main map page.
         $location.path('/');
     }
+    $scope.banners = locationToPostSvc.fetchByLocationId()
+    $scope.title = location.title;
+    $scope.bannerExit = function (){$location.path('/')};
+
 
     /*
     var banner1 = {};
