@@ -46,6 +46,9 @@ html(lang='utf-8')
         // LOGIN Modal CSS
         link(href='stylesheets/style.css', rel='stylesheet')
 
+        // About CSS
+        link(href="stylesheets/about.css", rel='stylesheet')
+
     body(ng-app='app', ng-controller='appCtrl')
 
         /////////// loading splash and login page
@@ -111,7 +114,7 @@ html(lang='utf-8')
                     ng-view.page.pageClass(class='{{ }}')
 
         // login modal
-        modal#modal(visible='showModal && default')
+        // modal#modal(visible='showModal && default')
             .container
                 button.btn.btn-social.btn-facebook(ng-click='toggleAuth()')
                     span.fa.fa-facebook
