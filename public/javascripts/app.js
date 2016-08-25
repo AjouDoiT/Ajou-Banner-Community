@@ -51,16 +51,22 @@ app.controller('aboutCtrl',function ($scope) {
     $scope.pageClass = 'page-about';
 });
 
-app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
+app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope, $location){
     // initalize map
     $scope.pageClass =  'page-map';
     $scope.goToBanner = function (index){
         // get Marker's index and connect proper Banner using the index
         $rootScope.currentLocation = locations[index];
+        $location.path('/banner');
         // get posts by
     };
 
     $timeout(initialize, 100);
+
+    // variables for functions handling map
+    var markers = [];
+    var cityCircle;
+    var myPosition;
 
     function initialize() {
         var zoomLevel = 17;
@@ -210,7 +216,13 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
     initialize();
 });
 
-app.controller('bannerCtrl', function ($scope) {
+app.controller('bannerCtrl', function ($scope, $rootScope, $location) {
+    if (!$rootScope.currentLocation){
+        alert("비정상적인 접근입니다.");
+        $location.path('/');
+    }
+
+    /*
     var banner1 = {};
     banner1.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12523187_490784281123355_9177436322547340471_n.jpg?oh=dba858b162f5ef90bdd77105405888a2&oe=58208515";
     banner1.body = "hello !";
@@ -225,9 +237,10 @@ app.controller('bannerCtrl', function ($scope) {
     banner2.date = "15:11";
 
     $scope.banners = [banner1, banner2];
-
+*/
 });
 
+/* modal is depreciated by splash screen in out prj
 app.directive('modal', function () {
     return {
         template: '<div class="modal fade"  data-keyboard="false" data-backdrop="static">' +
@@ -269,9 +282,5 @@ app.directive('modal', function () {
         }
     };
 });
+*/
 
-// global variables (map)
-
-var markers = [];
-var cityCircle;
-var myPosition;

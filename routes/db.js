@@ -5,7 +5,7 @@
 var Post = require('../model/post');
 
 module.exports = function(app){
-	//Get all posts
+	//Get all posts by location ID
 	app.get('/freeboard/posts',function(req,res){
 		Post.find({location_id: req.params.location_id},{_id:0, uid:0},function(err,posts){
 			if(err) return res.status(500).send({error: 'Database failure'});
