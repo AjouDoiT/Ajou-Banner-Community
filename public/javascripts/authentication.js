@@ -23,6 +23,9 @@ app.service('$auth', function($route) {
 	// firebase 객체를 사용하지 않도록 하기 위함임!
 	var currentUser;
 
+	this.getCurrentUser = function (){
+		return currentUser;
+	}
 	// Initailzation Function
 	// Called in $scope controller
 	this.init = function () {
@@ -67,11 +70,13 @@ app.service('$auth', function($route) {
 				$('#modal').modal('hide');
 				// 현 사용자 정보가 메인 페이지에
 				// 적용될 수 있게 스크립트만 짜주면 될 듯
+
 				currentUser = {
 					displayName: user.displayName,
 					email: user.email,
-					photoURL: user.photoURL
-				}
+					photoURL: user.photoURL,
+					uid : user.uid
+				};
 				angular.element('#loader-wrapper').fadeOut(500);
 			}
 			else {

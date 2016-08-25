@@ -13,9 +13,9 @@
                         strong {{title}}
 
         .input-group
-            input.form-control(type="text" placeholder="What do you thinking about ?")
+            input.form-control(type="text" placeholder="What do you thinking about ?" ng-model="postInput")
             span.input-group-btn
-                button.btn.btn-default(type="button") Post
+                button.btn.btn-default(type="button" ng-click='addPost()') Post
         ul.ilst-group.col-lg-12
             li.list-group-item(ng-repeat="banner in banners | orderBy: '-date' ")
                 .row

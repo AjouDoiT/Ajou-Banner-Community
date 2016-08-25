@@ -14,11 +14,6 @@ var app = express();
 var redirectApp = express();
 
 
-var mongoose = require('mongoose');
-var Post = require('./model/post');
-require('./routes/db')(app);
-
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -30,8 +25,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.use('/admin', require('./routes/admin'));
 app.use('/', routes);
+
+
+var mongoose = require('mongoose');
+var Post = require('./model/post');
+require('./routes/db')(app);
+
+
 /**
  * DataBase HANDLING
  * by. FrogAhn

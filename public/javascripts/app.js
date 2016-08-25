@@ -51,7 +51,8 @@ app.controller('aboutCtrl',function ($scope) {
     $scope.pageClass = 'page-about';
 });
 
-app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope, $location){
+app.controller('mapCtrl', function ($scope, $compile, $timeout,
+                                    $rootScope, $location){
     // initalize map
     $scope.pageClass =  'page-map';
     $scope.goToBanner = function (index){
@@ -215,25 +216,54 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope, $loc
 
     initialize();
 });
-app.service('locationToPostSvc', function (){
+app.service('locationToPostSvc', function ($http){
     this.fetchByLocationId = function (id) {
-        return $http.get('/freeboard/posts', {params : {location_id : id}});
+        return $http.get('/freeboard/posts', {
+            params: {location_id : id}
+        });
     };
-    this.createByLocationId = function (id) {
-        return ;
+    this.createByLocationId = function (data) {
+        return $http.post('/freeboard/posts', data);
     }
 });
-app.controller('bannerCtrl', function ($scope, $rootScope, $location, locationToPostSvc) {
+app.controller('bannerCtrl', function ($scope, $rootScope,
+                                       $auth, $location,
+                                       locationToPostSvc) {
     var location;
     if (!(location = $rootScope.currentLocation)){
         // if selected location is not exist,
-        // redirect to main map page.
+        // redirect to main map page.s
         $location.path('/');
     }
-    $scope.banners = locationToPostSvc.fetchByLocationId()
+    locationToPostSvc.fetchByLocationId(location.location_id)
+        .then(function (res) {
+            $scope.banners = res.data;
+        });
+    $scope.addPost = function () {
+        var postInput = $scope.postInput.trim();
+        var user = $auth.getCurrentUser();
+
+        if (!$scope.postInput) return;// no empty post
+        var data = {
+            location_id : location.location_id,
+            username : user.displayName,
+            body : postInput,
+            uid : user.uid
+        };
+        locationToPostSvc.createByLocationId(data)
+            .then(function (res){
+                var banner = {
+                    pfPic : user.photoURL,
+                    body : postInput, 
+                    username : user.username,
+                    data : res.data.date
+                };
+                $scope.banners.unshift(banner);
+                $scope.postInput = "" ;
+            })
+    }
     $scope.title = location.title;
     $scope.bannerExit = function (){$location.path('/')};
-
 
     /*
     var banner1 = {};
