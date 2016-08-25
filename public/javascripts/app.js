@@ -101,10 +101,11 @@ app.controller('mapCtrl', function ($scope, $compile){
     function GeoLocationControl(controlDiv, map, geoOptions, locations) {
         // Set CSS for the control button
         var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#444';
+        controlUI.style.backgroundColor = 'blue';
+        controlUI.style.borderRadius = '10%';
         controlUI.style.borderStyle = 'solid';
         controlUI.style.borderWidth = '1px';
-        controlUI.style.borderColor = 'white';
+        controlUI.style.borderColor = 'blue';
         controlUI.style.height = '28px';
         controlUI.style.marginTop = '5px';
         controlUI.style.cursor = 'pointer';
@@ -114,11 +115,12 @@ app.controller('mapCtrl', function ($scope, $compile){
         // Set CSS for the control text
         var controlText = document.createElement('div');
         controlText.style.fontFamily = 'Arial,sans-serif';
-        controlText.style.fontSize = '10px';
-        controlText.style.color = 'white';
+        controlText.style.fontSize = '12px';
+        controlText.style.fontWeight = 'bold';
+        controlText.style.color = 'yellow';
         controlText.style.paddingLeft = '10px';
         controlText.style.paddingRight = '10px';
-        controlText.style.marginTop = '8px';
+        controlText.style.marginTop = '5px';
         controlText.innerHTML = '현재 위치 찾기';
         controlUI.appendChild(controlText);
         // Setup the click event listeners to geolocate user
