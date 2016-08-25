@@ -11,8 +11,8 @@ module.exports = function(app){
 			if(err) return res.status(500).send({error: 'Database failure'});
 			res.json(posts);
 		})
-	}); 
-	
+	});
+    
 	//Get posts by id
 	app.get('/freeboard/posts/body',function(req,res){
 		Post.find({location_id: req.params.location_id, username: req.params.username},{_id:0, uid:0},function(err,posts){

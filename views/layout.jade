@@ -27,6 +27,12 @@ html(lang='utf-8')
         link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
         link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
 
+        // ---------------------------------------------------------------------------- 미확인 CSS들 ----------------------------------------------------------------------------
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+        // Custom Fonts
+        link(href='stylesheets/font-awesome.min.css', rel='stylesheet', type='text/css')
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
         // 이거 지워도 제대로 돌아가는지 확인해보기 Why?? body에도 똑같은게 있어서
         script(src='https://code.jquery.com/jquery-latest.min.js')
         // JavaScript for Google Map Api
@@ -40,12 +46,22 @@ html(lang='utf-8')
         // LOGIN Modal CSS
         link(href='stylesheets/style.css', rel='stylesheet')
 
-        // ---------------------------------------------------------------------------- 미확인 CSS들 ----------------------------------------------------------------------------
-        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
-        // Custom Fonts
-        link(href='stylesheets/font-awesome.min.css', rel='stylesheet', type='text/css')
-
     body(ng-app='app', ng-controller='appCtrl')
+
+        /////////// loading splash and login page
+        div(id='loader-wrapper')
+                div(class='loader-cover')
+                    h1(class='loader-content') Ajou Banner Community
+                    div(id='socialLogin')
+                        button(class="btn btn-social btn-facebook", ng-click="toggleAuth()")
+                            span(class="fa fa-facebook")
+                            | Sign in with Facebook
+                        div(id='loaderInfo')
+                            p 본 서비스는 Facebook 로그인을 하셔야 사용할 수 있습니다.
+                            p 로그인하신 분은 조금만 기다려주세요 :)
+                    div(id='img-wrapper')
+                        img(class='loader-content' src='loader.gif')
+        ////////////
         // Entire Layout
         .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
             // Page Top Header

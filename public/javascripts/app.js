@@ -12,13 +12,6 @@ app.config(function($routeProvider) {
 });
 
 app.controller('appCtrl',function ($scope, $auth) {
-    angular.element("#toggleButton").addClass("collapsed");
-    $scope.menuClick = function(){
-        // 작은 화면일 때 메뉴바가 닫히는 기능
-        var button = angular.element("#toggleButton");
-        if (!button.attr('class').includes('collapsed'))
-            button.click();
-    };
 
     $scope.toggleAuth = function(){
         if(!firebase.auth().currentUser){
@@ -39,6 +32,7 @@ app.controller('appCtrl',function ($scope, $auth) {
 
     $auth.setScopeOnAuthStateChange($scope);
 
+
     // modal ctrl
     $scope.default = true;
     $scope.$on('$viewContentLoaded', function() {
@@ -50,27 +44,23 @@ app.controller('appCtrl',function ($scope, $auth) {
   //      $scope.buttonClicked = btnClicked;
   //      $scope.showModal = !$scope.showModal;
   //  }
+
 });
 
 app.controller('aboutCtrl',function ($scope) {
     $scope.pageClass = 'page-about';
 });
 
-app.controller('mapCtrl', function ($scope, $compile){
+app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
     // initalize map
-    initialize();
-
     $scope.pageClass =  'page-map';
     $scope.goToBanner = function (index){
         // get Marker's index and connect proper Banner using the index
         $rootScope.currentLocation = locations[index];
-        // get posts by 
-
+        // get posts by
     };
 
-    var markers = [];
-    var cityCircle;
-    var myPosition;
+    $timeout(initialize, 100);
 
     function initialize() {
         var zoomLevel = 17;
@@ -217,6 +207,9 @@ app.controller('mapCtrl', function ($scope, $compile){
         cityCircle.setMap(null);
         myPosition.setMap(null);
     }
+
+
+    initialize();
 });
 
 app.controller('bannerCtrl', function ($scope) {
@@ -279,3 +272,8 @@ app.directive('modal', function () {
     };
 });
 
+// global variables (map)
+
+var markers = [];
+var cityCircle;
+var myPosition;
