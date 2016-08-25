@@ -63,7 +63,7 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
     $timeout(initialize, 100);
 
     function initialize() {
-        var zoomLevel = 17;
+        var zoomLevel = 18;
         var geocoder = new google.maps.Geocoder();
         var gps = navigator.geolocation;
         var markerMaxWidth = 300;
@@ -131,13 +131,14 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
                 cityCircle = new google.maps.Circle({
                     center: new google.maps.LatLng(latitude, longitude),
                     //center: new google.maps.LatLng(37.2834866,127.0447932) ,
-                    radius: 250,
+                    radius: 100,
                     strokeColor: "#000000",
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
                     fillColor: "#808080",
                     fillOpacity: 0.5
                 });
+                markers.push(cityCircle);
                 cityCircle.setMap(map);
                 // 현재 위치에 마커 생성
                 myPosition = new google.maps.Marker({
@@ -147,6 +148,7 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
                     draggable: false,
                     icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
                 });
+                markers.push(myPosition);
                 map.setCenter(new google.maps.LatLng(latitude, longitude));
                 //map.setCenter(new google.maps.LatLng(37.2834866,127.0447932));
                 console.log("위도"+latitude);
@@ -154,8 +156,8 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
 
                 //반경500m 이내의 마커만 표시하기
                 for (index in locations) {
-                    if (Math.pow(Math.abs(latitude * 100000 - locations[index].latitude * 100000), 2) +
-                        Math.pow(Math.abs(longitude * 100000 - locations[index].longitude * 100000), 2) < 62500)
+                    if (Math.pow((latitude * 100000 - locations[index].latitude * 100000), 2) +
+                        Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2) < 10000)
                     addMarker(locations[index], index);
                 };
                 function addMarker(data, index) {
