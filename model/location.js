@@ -3,6 +3,7 @@
  */
 
 var db = require('mongoose');
+
 var Schema = db.Schema;
 var locationSchema = new Schema({
     location_id: {type:String, required: true},

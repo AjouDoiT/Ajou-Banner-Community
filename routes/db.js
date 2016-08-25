@@ -5,17 +5,17 @@
 var Post = require('../model/post');
 
 module.exports = function(app){
-	//Get all posts
+	//Get all posts by location ID
 	app.get('/freeboard/posts',function(req,res){
-		Post.find(function(err,posts){
+		Post.find({location_id: req.params.location_id},{_id:0, uid:0},function(err,posts){
 			if(err) return res.status(500).send({error: 'Database failure'});
 			res.json(posts);
 		})
-	}); 
-	
+	});
+    
 	//Get posts by id
 	app.get('/freeboard/posts/body',function(req,res){
-		Post.find({body: req.params.body},{_id:0, username:1,body:1,date:1},function(err,posts){
+		Post.find({location_id: req.params.location_id, username: req.params.username},{_id:0, uid:0},function(err,posts){
 			if(err) return res.status(500).json({error:err});
 			if(posts.length ===0 ) return res.status(404).json({error: "It doesn't match with any posts"});
 			res.json(posts);
@@ -46,10 +46,10 @@ module.exports = function(app){
 	});*/
 	
 	//Delete post
-	app.delete('/freeboard/posts/id',function(req,res){
+	/*app.delete('/freeboard/posts/id',function(req,res){
 		Post.remove({_id: req.params._id},function(err,output){
 			if(err) return res.status(500).json({error: "data remove failure"});
 			res.status(204).end();
 		})
-	});
+	})*/
 }

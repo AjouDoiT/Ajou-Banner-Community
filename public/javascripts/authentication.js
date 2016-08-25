@@ -72,15 +72,15 @@ app.service('$auth', function($route) {
 					email: user.email,
 					photoURL: user.photoURL
 				}
-				//display user infomation
-				$scope.name = currentUser.displayName + '님';
-				$scope.userPhoto = currentUser.photoURL;
-
+				angular.element('#loader-wrapper').fadeOut(500);
 			}
 			else {
 				//$scope.showModal = true;
-				$scope.state = "";
 				$route.reload();
+				angular.element('#loader-wrapper').fadeIn(500);
+				angular.element('#img-wrapper').fadeOut(500, function(){
+					angular.element('#socialLogin').fadeIn(500);
+				});
 				// 로그아웃이 됐을 경우의 로직
 				// index.html(메인페이지 화면)으로 redirect하게
 				// 하면 될 듯

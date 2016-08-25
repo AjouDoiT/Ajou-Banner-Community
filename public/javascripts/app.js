@@ -7,19 +7,11 @@ var app = angular.module("app", ['ngRoute', 'ngAnimate']);
 app.config(function($routeProvider) {
     $routeProvider
         .when("/", {templateUrl : "map", controller :'mapCtrl'})
-        .when("/map", {templateUrl : "map", controller :'mapCtrl'})
         .when("/about", {templateUrl : "about", controller: 'aboutCtrl'})
         .when("/banner", {templateUrl : "banner", controller: 'bannerCtrl'});
 });
 
 app.controller('appCtrl',function ($scope, $auth) {
-    angular.element("#toggleButton").addClass("collapsed");
-    $scope.menuClick = function(){
-        // 작은 화면일 때 메뉴바가 닫히는 기능
-        var button = angular.element("#toggleButton");
-        if (!button.attr('class').includes('collapsed'))
-            button.click();
-    };
 
     $scope.toggleAuth = function(){
         if(!firebase.auth().currentUser){
@@ -40,6 +32,7 @@ app.controller('appCtrl',function ($scope, $auth) {
 
     $auth.setScopeOnAuthStateChange($scope);
 
+
     // modal ctrl
     $scope.default = true;
     $scope.$on('$viewContentLoaded', function() {
@@ -51,30 +44,32 @@ app.controller('appCtrl',function ($scope, $auth) {
   //      $scope.buttonClicked = btnClicked;
   //      $scope.showModal = !$scope.showModal;
   //  }
+
 });
 
 app.controller('aboutCtrl',function ($scope) {
     $scope.pageClass = 'page-about';
 });
 
-app.controller('mapCtrl', function ($scope, $compile){
+app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope, $location){
     // initalize map
-    initialize();
-
     $scope.pageClass =  'page-map';
     $scope.goToBanner = function (index){
         // get Marker's index and connect proper Banner using the index
         $rootScope.currentLocation = locations[index];
-        // get posts by 
-
+        $location.path('/banner');
+        // get posts by
     };
 
+    $timeout(initialize, 100);
+
+    // variables for functions handling map
     var markers = [];
     var cityCircle;
     var myPosition;
 
     function initialize() {
-        var zoomLevel = 16;
+        var zoomLevel = 17;
         var geocoder = new google.maps.Geocoder();
         var gps = navigator.geolocation;
         var markerMaxWidth = 300;
@@ -158,13 +153,13 @@ app.controller('mapCtrl', function ($scope, $compile){
                 });
                 map.setCenter(new google.maps.LatLng(latitude, longitude));
                 //map.setCenter(new google.maps.LatLng(37.2834866,127.0447932));
-                console.log(latitude);
-                console.log(longitude);
+                console.log("위도"+latitude);
+                console.log("경도"+longitude);
 
                 //반경500m 이내의 마커만 표시하기
                 for (index in locations) {
-                    if (Math.pow(Math.abs(latitude * 100000 - locations[index].lat * 100000), 2) +
-                        Math.pow(Math.abs(longitude * 100000 - locations[index].lng * 100000), 2) < 62500);
+                    if (Math.pow(Math.abs(latitude * 100000 - locations[index].latitude * 100000), 2) +
+                        Math.pow(Math.abs(longitude * 100000 - locations[index].longitude * 100000), 2) < 62500)
                     addMarker(locations[index], index);
                 };
                 function addMarker(data, index) {
@@ -216,9 +211,31 @@ app.controller('mapCtrl', function ($scope, $compile){
         cityCircle.setMap(null);
         myPosition.setMap(null);
     }
-});
 
-app.controller('bannerCtrl', function ($scope) {
+
+    initialize();
+});
+app.service('locationToPostSvc', function (){
+    this.fetchByLocationId = function (id) {
+        return $http.get('/freeboard/posts', {params : {location_id : id}});
+    };
+    this.createByLocationId = function (id) {
+        return ;
+    }
+});
+app.controller('bannerCtrl', function ($scope, $rootScope, $location, locationToPostSvc) {
+    var location;
+    if (!(location = $rootScope.currentLocation)){
+        // if selected location is not exist,
+        // redirect to main map page.
+        $location.path('/');
+    }
+    $scope.banners = locationToPostSvc.fetchByLocationId()
+    $scope.title = location.title;
+    $scope.bannerExit = function (){$location.path('/')};
+
+
+    /*
     var banner1 = {};
     banner1.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12523187_490784281123355_9177436322547340471_n.jpg?oh=dba858b162f5ef90bdd77105405888a2&oe=58208515";
     banner1.body = "hello !";
@@ -233,9 +250,10 @@ app.controller('bannerCtrl', function ($scope) {
     banner2.date = "15:11";
 
     $scope.banners = [banner1, banner2];
-
+*/
 });
 
+/* modal is depreciated by splash screen in out prj
 app.directive('modal', function () {
     return {
         template: '<div class="modal fade"  data-keyboard="false" data-backdrop="static">' +
@@ -277,4 +295,5 @@ app.directive('modal', function () {
         }
     };
 });
+*/
 
