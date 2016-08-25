@@ -28,23 +28,7 @@ app.controller('appCtrl',function ($scope, $auth) {
         }
     };
     // Authentication Initialization
-    $auth.init();
-
-    $auth.setScopeOnAuthStateChange($scope);
-
-
-    // modal ctrl
-    $scope.default = true;
-    $scope.$on('$viewContentLoaded', function() {
-        //call it here
-       $scope.showModal = !$auth.checkSignedIn();
-    });
-  //  $scope.buttonClicked = "";
-  //  $scope.toggleModal = function(btnClicked) {
-  //      $scope.buttonClicked = btnClicked;
-  //      $scope.showModal = !$scope.showModal;
-  //  }
-
+    $auth.init($scope);
 });
 
 app.controller('aboutCtrl',function ($scope) {
@@ -226,48 +210,6 @@ app.controller('bannerCtrl', function ($scope) {
 
     $scope.banners = [banner1, banner2];
 
-});
-
-app.directive('modal', function () {
-    return {
-        template: '<div class="modal fade"  data-keyboard="false" data-backdrop="static">' +
-        '<div class="modal-dialog">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header">' +
-        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-        '<h4 class="modal-title">Ajou Banner Community</h4>' +
-        '</div>' +
-        '<div class="modal-body" ng-transclude></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>',
-        restrict: 'E',
-        transclude: true,
-        replace:true,
-        scope:true,
-        link: function postLink(scope, element, attrs) {
-            scope.title = attrs.title;
-
-            scope.$watch(attrs.visible, function(value){
-                if(value == true)
-                    $(element).modal('show');
-                else
-                    $(element).modal('hide');
-            });
-
-            $(element).on('shown.bs.modal', function(){
-                scope.$apply(function(){
-                    scope.$parent[attrs.visible] = true;
-                });
-            });
-
-            $(element).on('hidden.bs.modal', function(){
-                scope.$apply(function(){
-                    scope.$parent[attrs.visible] = false;
-                });
-            });
-        }
-    };
 });
 
 // global variables (map)

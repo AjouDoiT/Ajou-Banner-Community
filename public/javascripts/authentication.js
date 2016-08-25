@@ -25,7 +25,7 @@ app.service('$auth', function($route) {
 
 	// Initailzation Function
 	// Called in $scope controller
-	this.init = function () {
+	this.init = function ($scope) {
 		firebase.auth().getRedirectResult().then(function (result) {
 			if (result.credential) {
 				// Access 토큰은 필요없을거 같은데...?
@@ -56,38 +56,34 @@ app.service('$auth', function($route) {
 				console.error(error);
 			}
 		});
-	};
 
-	this.setScopeOnAuthStateChange = function ($scope) {
-		firebase.auth().onAuthStateChanged(function (user) {
-			if (user) {
-				$scope.state = user.displayName;
-				$scope.showModal = false;
-				// currentUser 객체는 global하게 접근 가능!
-				$('#modal').modal('hide');
-				// 현 사용자 정보가 메인 페이지에
-				// 적용될 수 있게 스크립트만 짜주면 될 듯
-				currentUser = {
-					displayName: user.displayName,
-					email: user.email,
-					photoURL: user.photoURL
-				}
-				angular.element('#loader-wrapper').fadeOut(500);
-			}
-			else {
-				//$scope.showModal = true;
-				$route.reload();
-				angular.element('#loader-wrapper').fadeIn(500);
-				angular.element('#img-wrapper').fadeOut(500, function(){
-					angular.element('#socialLogin').fadeIn(500);
-				});
-				// 로그아웃이 됐을 경우의 로직
-				// index.html(메인페이지 화면)으로 redirect하게
-				// 하면 될 듯
-				angular.element('#loader-wrapper').fadeIn(500);
-			}
-		});
-	}
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                $scope.state = user.displayName;
+                // currentUser 객체는 global하게 접근 가능!
+                // 현 사용자 정보가 메인 페이지에
+                // 적용될 수 있게 스크립트만 짜주면 될 듯
+                $scope.currentUser = {
+                    displayName: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL
+                }
+                $route.reload();
+                angular.element('#loader-wrapper').fadeOut(500);
+            }
+            else {
+                $scope.currentUser = null;
+                angular.element('#loader-wrapper').fadeIn(500);
+                angular.element('#img-wrapper').fadeOut(500, function(){
+                    angular.element('#socialLogin').fadeIn(500);
+                });
+                // 로그아웃이 됐을 경우의 로직
+                // index.html(메인페이지 화면)으로 redirect하게
+                // 하면 될 듯
+                //angular.element('#loader-wrapper').fadeIn(500);
+            }
+        });
+	};
 
 	// 로그인 여부 확인
 	// 현재는 T/F만 return하는 것으로
