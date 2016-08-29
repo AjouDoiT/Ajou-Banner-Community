@@ -17,7 +17,7 @@
             span.input-group-btn
                 button.btn.btn-default(type="button" ng-click='addPost()') Post
         ul.ilst-group.col-lg-12
-            li.list-group-item(ng-repeat="banner in banners | orderBy: '-date' ")
+                li.list-group-item(ng-repeat="banner in banners | orderBy: '-date' ")
                 .row
                     .col-md-9.col-lg-10.col-sm-8.col-xs-8
                         img.img-thumbnail(src='{{banner.pfPic}}')

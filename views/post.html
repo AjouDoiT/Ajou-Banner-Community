@@ -7,84 +7,37 @@
 
     <title>3 Col Portfolio - Start Bootstrap Template</title>
 
-    <link rel="stylesheet" href="../public/stylesheets/post.css">
+    <link rel="stylesheet" href="stylesheets/post.css">
 
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css'>
 
 
-    <style>
-        /* Square card */
-        .demo-card-square.mdl-card {
-            width: 320px;
-            height: 320px;
-        }
-        .demo-card-square > .mdl-card__title {
-            color: #fff;
-            background-color: #46B6AC;
-        }
-        /* Textarea CSS*/
-        #userInput {
-            border: 2px solid #765942;
-            height: 45px;
-            width: 920px;
-            resize: none;
-            overflow:hidden;
-            margin-top: 10px;
-        }
-        #userInput:focus{
-            border-color: rgba(38, 155, 201, 0.8);
-            box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(38, 155, 201, 0.6);
-        }
-        /*Button CSS*/
-        button{
-            float: right;
-            color: #ACEC00 !important;
-            background: #3f51b5 !important;
-        }
-    </style>
 </head>
 <body>
-<div id="pagewrap">
+<div id="pagewrap" ng-controller="bannerCtrl">
 
-    <header>
+    <header><!--
         <textarea id="userInput"></textarea>
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
             POST
-        </button>
+        </button> -->
+        <h1><strong>{{title}}</strong></h1>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">EXIT</button>
     </header>
 
-    <hr>
-
+    <textarea id="userInput"></textarea>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        POST
+    </button>
     <section id="left">
-        <div class="post demo-card-square mdl-card mdl-shadow--2dp">
+        <div ng-repeat="banner in banners | filter : leftCardChooser " class="post demo-card-square mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">Update</h2>
+                <h6 class="mdl-card__title-text">{{banner.username}}</h6>
             </div>
             <div class="mdl-card__supporting-text">
-                Lorem ipsum doltur adipiscing elit.
-            </div>
-        </div>
-        <div class="post demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">Update</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aenan convallis.
+                {{banner.body}}
             </div>
         </div>
     </section>

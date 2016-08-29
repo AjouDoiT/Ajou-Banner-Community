@@ -46,6 +46,13 @@ html(lang='utf-8')
         // LOGIN Modal CSS
         link(href='stylesheets/style.css', rel='stylesheet')
 
+        // banner.jade CSS
+
+        link(rel='stylesheet', href='stylesheets/post.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
+
     body(ng-app='app', ng-controller='appCtrl')
 
         /////////// loading splash and login page
@@ -106,18 +113,12 @@ html(lang='utf-8')
                     .mdl-layout-spacer
             // Page Center Main (Contents Part)
             main.mdl-layout__content.mdl-color--grey-100.main
-                .mdl-shadow--2dp.mdl-cell--12-col.mdl-grid.main-view
+                .mdl-shadow--2dp.mdl-cell--12-col.mdl-grid.main-view.main-card
                     // Page Content
                     ng-view.page.pageClass(class='{{ }}')
 
-        // login modal
-        modal#modal(visible='showModal && default')
-            .container
-                button.btn.btn-social.btn-facebook(ng-click='toggleAuth()')
-                    span.fa.fa-facebook
-                    | Sign in with Facebook
-
         // "Show Your Location"버튼
+
         a#view-source.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored.mdl-color-text--white(href='#', target='_blank')
             | Show Your Location
 
@@ -134,6 +135,7 @@ html(lang='utf-8')
         script(src='https://code.jquery.com/jquery-latest.min.js')
         // Bootstrap Core JavaScript
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
 
         // ----------------------------------------------------------------------------Custom JavaScript----------------------------------------------------------------------------
         script(src='javascripts/app.js')

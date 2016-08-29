@@ -8,8 +8,9 @@ module.exports = function(app){
 	//Get all posts by location ID
 	app.get('/freeboard/posts',function(req,res){
 		Post.find({location_id: req.query.location_id},{_id:0, uid:0},function(err,posts){
+		//	console.log(req.query);
 			if(err) return res.status(500).send({error: 'Database failure'});
-			console.log(posts);
+			//console.log(posts);
 			res.json(posts);
 		})
 	});
@@ -26,6 +27,7 @@ module.exports = function(app){
 	//Create post
 	app.post('/freeboard/posts',function(req,res,next){
 		var post = new Post();
+		//console.log(req.body);
 		post.uid = req.body.uid;
 		post.username = req.body.username;
 		post.body = req.body.body;

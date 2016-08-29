@@ -51,3 +51,7 @@
 #loaderInfo > p {
     margin-bottom: 0px;
 }
+
+.main-card {
+    display:inline-block;
+}

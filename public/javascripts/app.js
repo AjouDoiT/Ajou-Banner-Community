@@ -265,6 +265,9 @@ app.controller('bannerCtrl', function ($scope, $rootScope,
     $scope.title = location.title;
     $scope.bannerExit = function (){$location.path('/')};
 
+    $scope.leftCardChooser = function (element){
+      alert(element.$index);
+    };
     /*
     var banner1 = {};
     banner1.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12523187_490784281123355_9177436322547340471_n.jpg?oh=dba858b162f5ef90bdd77105405888a2&oe=58208515";
