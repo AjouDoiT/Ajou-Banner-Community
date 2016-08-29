@@ -39,6 +39,7 @@ html(lang='utf-8')
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDu0DI39SjhOzsPXq_OSv1-LdT3HdfUI8U')
 
         // ----------------------------------------------------------------------------Custom CSS----------------------------------------------------------------------------
+        link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
         // Material Design CSS
         link(href='stylesheets/MaterialStyle.css', rel='stylesheet')
         // Animation CSS
@@ -52,7 +53,7 @@ html(lang='utf-8')
         link(rel='stylesheet', href='stylesheets/post.css')
         link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en')
         link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-        link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
+
 
     body(ng-app='app', ng-controller='appCtrl')
 
@@ -116,18 +117,8 @@ html(lang='utf-8')
             main.mdl-layout__content.mdl-color--grey-100.main
                 .mdl-shadow--2dp.mdl-cell--12-col.mdl-grid.main-view
                     // Page Content
-                    ng-view.page.pageClass(class='{{ }}')
+                    ng-view.page.pageClass.ngview(class='{{ }}')
 
-        // login modal
-        // modal#modal(visible='showModal && default')
-            .container
-                button.btn.btn-social.btn-facebook(ng-click='toggleAuth()')
-                    span.fa.fa-facebook
-                    | Sign in with Facebook
-
-        // "Show Your Location"버튼
-        a#view-source.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored.mdl-color-text--white(href='#', target='_blank')
-            | Show Your Location
 
         // Material Design for JavaScript
         script(src='https://code.getmdl.io/1.2.0/material.min.js')

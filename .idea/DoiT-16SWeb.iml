@@ -9,5 +9,6 @@
     <orderEntry type="library" name="firebase" level="application" />
     <orderEntry type="library" name="gitHub node_modules" level="project" />
     <orderEntry type="library" name="angularjs-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="DoiT-16SWeb node_modules" level="project" />
   </component>
 </module>

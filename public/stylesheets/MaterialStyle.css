@@ -241,8 +241,18 @@ _:-ms-input-placeholder, :root .demo-graph {
 
 .main-view{
     position: absolute;
-    width: calc(100% - 30px);
+    width: calc(100% - 30px) !important;
     min-height: calc(100% - 30px);
     height: auto;
     margin-bottom: 10px;
+}
+
+.ngview{
+    width: calc(100% - 10px) !important;
+}
+
+@media screen and (max-width: 480px) {
+    #map{
+        width: 96% !important;
+    }
 }

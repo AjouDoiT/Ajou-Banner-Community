@@ -10,17 +10,15 @@ body {
 .post{
     width: 300px !important;
     margin-top: 15px;
-    margin-left: 5px;
+    margin-left: 15px;
     height:  auto !important;
 }
 
 #pagewrap {
     padding: 5px;
-    width: 960px;
-    margin: 20px auto;
+    width: 100%;
 }
 header {
-    height: 110px;
     padding: 0 15px;
 }
 #left {
@@ -40,11 +38,6 @@ header {
     width: 302px;
     padding: 5px 5px;
     float: left;
-}
-
-footer {
-    clear: both;
-    padding: 0 15px;
 }
 
 /************************************************************************************
@@ -74,8 +67,12 @@ MEDIA QUERIES
         float: none;
     }
 
-    header, footer {
+    header{
         padding: 1% 4%;
+    }
+
+    #userInput{
+        width:89% !important;
     }
 }
 
@@ -98,6 +95,9 @@ MEDIA QUERIES
         float: none;
     }
 
+    #userInput{
+        width:77% !important;
+    }
 }
 
 /* for 480px or less */
@@ -110,14 +110,23 @@ MEDIA QUERIES
         font-size: 2em;
     }
 
+    #userInput{
+        width:100% !important;
+    }
+
+    .postbtn{
+        margin-top: 5px;
+        width: 4% !important;
+    }
+
+
+    .inputcard{
+        width: 340px !important;
+    }
 }
 
 header, #left, #middle, #right {
     margin-bottom: 5px;
-}
-
-#pagewrap, footer {
-    border: solid 1px #ccc;
 }
 
 /* Square card */
@@ -129,23 +138,41 @@ header, #left, #middle, #right {
     color: #fff;
     background-color: #46B6AC;
 }
-
-/* Textarea CSS
+/* Textarea CSS*/
 #userInput {
     border: 2px solid #765942;
     height: 45px;
-    width: 920px;
+    width: 94%;
     resize: none;
     overflow:hidden;
-    margin-top: 10px;
 }
+
 #userInput:focus{
     border-color: rgba(38, 155, 201, 0.8);
     box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(38, 155, 201, 0.6);
 }
-/*Button CSS
-button{
+
+/*Button CSS*/
+.postbtn{
+    position: relative;
     float: right;
-    color: #ACEC00 !important;
-    background: #3f51b5 !important;
-}*/*/*/
+    color: #fff !important;
+    background: #46B6AC !important;
+    vertical-align: middle;
+    height: 45px !important;
+    width:5% !important;
+}
+
+.exitbtn{
+    position: inherit;
+    float: right;
+    margin-right: 18px !important;
+}
+
+.inputgroup{
+    width: 100% !important;
+}
+
+.inputcard{
+    width: 100% !important;
+}
