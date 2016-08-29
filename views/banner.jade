@@ -1,11 +1,11 @@
 
 #pagewrap(ng-controller='bannerCtrl')
     header
-        h1
+        h3
             strong {{title}}
-        button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored EXIT
-        textarea#userInput
-        button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored
+        button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(ng-click='bannerExit()') EXIT
+        input#userInput(ng-model='postInput')
+        button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(ng-click='addPost()')
             | POST
     hr
 

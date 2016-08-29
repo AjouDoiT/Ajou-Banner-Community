@@ -11,19 +11,18 @@ app.config(function($routeProvider) {
         .when("/banner", {templateUrl : "banner", controller: 'bannerCtrl'});
 });
 
-app.controller('appCtrl',function ($scope, $auth) {
+app.controller('appCtrl',function ($scope, $auth, $timeout) {
 
-    $scope.toggleAuth = function(){
-        if(!firebase.auth().currentUser){
+    $scope.toggleAuth = function () {
+        if (!firebase.auth().currentUser) {
             // Firebase FB Login Provider로 시작
             // 팝업창 없이 현화면에서 redirect
             var provider = new firebase.auth.FacebookAuthProvider();
-            firebase.auth().signInWithRedirect(provider).then(function (){
+            firebase.auth().signInWithRedirect(provider).then(function () {
                 $scope.showModal = false;
             });
         }
-        else{
-            // 로그아웃
+        else {// 로그아웃
             firebase.auth().signOut();
         }
     };
@@ -32,18 +31,6 @@ app.controller('appCtrl',function ($scope, $auth) {
 
     $auth.setScopeOnAuthStateChange($scope);
 
-
-    // modal ctrl
-    $scope.default = true;
-    $scope.$on('$viewContentLoaded', function() {
-        //call it here
-       $scope.showModal = !$auth.checkSignedIn();
-    });
-  //  $scope.buttonClicked = "";
-  //  $scope.toggleModal = function(btnClicked) {
-  //      $scope.buttonClicked = btnClicked;
-  //      $scope.showModal = !$scope.showModal;
-  //  }
 
 });
 
@@ -167,7 +154,7 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
                         Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2));
                     if (Math.pow((latitude * 100000 - locations[index].latitude * 100000), 2) +
                         Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2) < 9000)
-                    addMarker(locations[index], index);
+                        addMarker(locations[index], index);
                 };
                 function addMarker(data, index) {
                     var marker = new google.maps.Marker({
@@ -260,79 +247,76 @@ app.controller('bannerCtrl', function ($scope, $rootScope,
             .then(function (res){
                 var banner = {
                     pfPic : user.photoURL,
-                    body : postInput, 
-                    username : user.username,
+                    body : postInput,
+                    username : user.displayName,
                     data : res.data.date
                 };
                 $scope.banners.unshift(banner);
-                $scope.postInput = "" ;
+                $scope.postInput = "";
             })
     }
     $scope.title = location.title;
     $scope.bannerExit = function (){$location.path('/')};
 
-    $scope.leftCardChooser = function (element){
-      alert(element.$index);
-    };
     /*
-    var banner1 = {};
-    banner1.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12523187_490784281123355_9177436322547340471_n.jpg?oh=dba858b162f5ef90bdd77105405888a2&oe=58208515";
-    banner1.body = "hello !";
-    banner1.username = "credtiger96  ";
-    banner1.date = "14:24";
+     var banner1 = {};
+     banner1.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/12523187_490784281123355_9177436322547340471_n.jpg?oh=dba858b162f5ef90bdd77105405888a2&oe=58208515";
+     banner1.body = "hello !";
+     banner1.username = "credtiger96  ";
+     banner1.date = "14:24";
 
-    var banner2 = {};
+     var banner2 = {};
 
-    banner2.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/11885156_728851200554207_4828033296060397603_n.jpg?oh=9ac0ea1a2ab6f125f11c83a42cb516e1&oe=5825FFA0";
-    banner2.body = " It's a nice day testttttttttttttttttttttttttttttttttttttttttttttttttt!";
-    banner2.username = "handsome_guy  ";
-    banner2.date = "15:11";
+     banner2.pfPic = "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/11885156_728851200554207_4828033296060397603_n.jpg?oh=9ac0ea1a2ab6f125f11c83a42cb516e1&oe=5825FFA0";
+     banner2.body = " It's a nice day testttttttttttttttttttttttttttttttttttttttttttttttttt!";
+     banner2.username = "handsome_guy  ";
+     banner2.date = "15:11";
 
-    $scope.banners = [banner1, banner2];
-*/
+     $scope.banners = [banner1, banner2];
+     */
 });
 
 /* modal is depreciated by splash screen in out prj
-app.directive('modal', function () {
-    return {
-        template: '<div class="modal fade"  data-keyboard="false" data-backdrop="static">' +
-        '<div class="modal-dialog">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header">' +
-        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-        '<h4 class="modal-title">Ajou Banner Community</h4>' +
-        '</div>' +
-        '<div class="modal-body" ng-transclude></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>',
-        restrict: 'E',
-        transclude: true,
-        replace:true,
-        scope:true,
-        link: function postLink(scope, element, attrs) {
-            scope.title = attrs.title;
+ app.directive('modal', function () {
+ return {
+ template: '<div class="modal fade"  data-keyboard="false" data-backdrop="static">' +
+ '<div class="modal-dialog">' +
+ '<div class="modal-content">' +
+ '<div class="modal-header">' +
+ '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+ '<h4 class="modal-title">Ajou Banner Community</h4>' +
+ '</div>' +
+ '<div class="modal-body" ng-transclude></div>' +
+ '</div>' +
+ '</div>' +
+ '</div>',
+ restrict: 'E',
+ transclude: true,
+ replace:true,
+ scope:true,
+ link: function postLink(scope, element, attrs) {
+ scope.title = attrs.title;
 
-            scope.$watch(attrs.visible, function(value){
-                if(value == true)
-                    $(element).modal('show');
-                else
-                    $(element).modal('hide');
-            });
+ scope.$watch(attrs.visible, function(value){
+ if(value == true)
+ $(element).modal('show');
+ else
+ $(element).modal('hide');
+ });
 
-            $(element).on('shown.bs.modal', function(){
-                scope.$apply(function(){
-                    scope.$parent[attrs.visible] = true;
-                });
-            });
+ $(element).on('shown.bs.modal', function(){
+ scope.$apply(function(){
+ scope.$parent[attrs.visible] = true;
+ });
+ });
 
-            $(element).on('hidden.bs.modal', function(){
-                scope.$apply(function(){
-                    scope.$parent[attrs.visible] = false;
-                });
-            });
-        }
-    };
-});
-*/
+ $(element).on('hidden.bs.modal', function(){
+ scope.$apply(function(){
+ scope.$parent[attrs.visible] = false;
+ });
+ });
+ }
+ };
+ });
+ */
 

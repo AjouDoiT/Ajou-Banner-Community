@@ -12,12 +12,6 @@ var routes = require('./routes/index');
 var app = express();
 var redirectApp = express();
 
-
-var mongoose = require('mongoose');
-var Post = require('./model/post');
-require('./routes/db')(app);
-
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -37,16 +31,23 @@ app.use('/', routes);
  */
 
 
+var mongoose = require('mongoose');
+var Post = require('./model/post');
+require('./routes/db')(app);
+
+
+
+
 mongoose.connect('mongodb://aws.lkaybob.pe.kr/ABCproject');
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error'));
 db.once('open',function callback(){
-	console.log("mongo db connection ok.");
+    console.log("mongo db connection ok.");
 });
 
 /*var user1 = new Post({uid: '123456', username: 'Sungsoo Ahn', body: 'Hi friends'});
-console.log(user1.date);
-user1.save();*/
+ console.log(user1.date);
+ user1.save();*/
 
 /**
  * Redirects from HTTP to HTTPS
@@ -65,9 +66,9 @@ redirectApp.use('*', function(req, res){
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -75,23 +76,26 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+
+        console.log(err);
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+    console.log(err);
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 module.exports = app;

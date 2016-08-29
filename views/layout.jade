@@ -49,6 +49,11 @@ html(lang='utf-8')
         // About CSS
         link(href="stylesheets/about.css", rel='stylesheet')
 
+        link(rel='stylesheet', href='stylesheets/post.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
+
     body(ng-app='app', ng-controller='appCtrl')
 
         /////////// loading splash and login page
@@ -85,7 +90,7 @@ html(lang='utf-8')
                             span.visuallyhidden Accounts
                         ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='accbtn')
                             li.mdl-menu__item My Post
-                            li.mdl-menu__item(ng-click='toggleAuth();') LogOut
+                            li.mdl-menu__item(ng-click='toggleAuth()') LogOut
                 // Menu bar
                 nav.demo-navigation.mdl-navigation.mdl-color--blue-grey-800
                     a.mdl-navigation__link(href='/#/')

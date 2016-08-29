@@ -27,7 +27,7 @@ module.exports = function(app){
 	//Create post
 	app.post('/freeboard/posts',function(req,res,next){
 		var post = new Post();
-		//console.log(req.body);
+        console.log(req);
 		post.uid = req.body.uid;
 		post.username = req.body.username;
 		post.body = req.body.body;
