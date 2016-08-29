@@ -64,7 +64,7 @@ app.controller('adminCtrl', function ($scope, AjaxSvc) {
                     $scope.longitude="";
                 },function(err){ // if it failed.
                     alert('[ERROR] please see console.' + err);
-                    console .log(err);
+                    console.log(err);
                 });
         }
     }

@@ -70,10 +70,10 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
     var myPosition;
 
     function initialize() {
-        var zoomLevel = 17;
+        var zoomLevel = 18;
         var geocoder = new google.maps.Geocoder();
         var gps = navigator.geolocation;
-        var markerMaxWidth = 300;
+        var markerMaxWidth = 500;
         var mapOptions = {
             zoom: zoomLevel,
             center: new google.maps.LatLng(37.2834866, 127.0447932),
@@ -98,10 +98,11 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
     function GeoLocationControl(controlDiv, map, geoOptions, locations) {
         // Set CSS for the control button
         var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#444';
+        controlUI.style.backgroundColor = 'blue';
+        controlUI.style.borderRadius = '10%';
         controlUI.style.borderStyle = 'solid';
         controlUI.style.borderWidth = '1px';
-        controlUI.style.borderColor = 'white';
+        controlUI.style.borderColor = 'blue';
         controlUI.style.height = '28px';
         controlUI.style.marginTop = '5px';
         controlUI.style.cursor = 'pointer';
@@ -111,11 +112,12 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
         // Set CSS for the control text
         var controlText = document.createElement('div');
         controlText.style.fontFamily = 'Arial,sans-serif';
-        controlText.style.fontSize = '10px';
-        controlText.style.color = 'white';
+        controlText.style.fontSize = '12px';
+        controlText.style.fontWeight = 'bold';
+        controlText.style.color = 'yellow';
         controlText.style.paddingLeft = '10px';
         controlText.style.paddingRight = '10px';
-        controlText.style.marginTop = '8px';
+        controlText.style.marginTop = '5px';
         controlText.innerHTML = '현재 위치 찾기';
         controlUI.appendChild(controlText);
         // Setup the click event listeners to geolocate user
@@ -136,13 +138,14 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
                 cityCircle = new google.maps.Circle({
                     center: new google.maps.LatLng(latitude, longitude),
                     //center: new google.maps.LatLng(37.2834866,127.0447932) ,
-                    radius: 250,
+                    radius: 100,
                     strokeColor: "#000000",
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
                     fillColor: "#808080",
                     fillOpacity: 0.5
                 });
+                markers.push(cityCircle);
                 cityCircle.setMap(map);
                 // 현재 위치에 마커 생성
                 myPosition = new google.maps.Marker({
@@ -152,6 +155,7 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
                     draggable: false,
                     icon: "https://maps.google.com/mapfiles/ms/micons/man.png"
                 });
+                markers.push(myPosition);
                 map.setCenter(new google.maps.LatLng(latitude, longitude));
                 //map.setCenter(new google.maps.LatLng(37.2834866,127.0447932));
                 console.log("위도"+latitude);
@@ -159,8 +163,10 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
 
                 //반경500m 이내의 마커만 표시하기
                 for (index in locations) {
-                    if (Math.pow(Math.abs(latitude * 100000 - locations[index].latitude * 100000), 2) +
-                        Math.pow(Math.abs(longitude * 100000 - locations[index].longitude * 100000), 2) < 62500)
+                    console.log(Math.pow((latitude * 100000 - locations[index].latitude * 100000), 2) +
+                        Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2));
+                    if (Math.pow((latitude * 100000 - locations[index].latitude * 100000), 2) +
+                        Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2) < 9000)
                     addMarker(locations[index], index);
                 };
                 function addMarker(data, index) {
