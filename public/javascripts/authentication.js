@@ -23,6 +23,9 @@ app.service('$auth', function($route) {
 	// firebase 객체를 사용하지 않도록 하기 위함임!
 	var currentUser;
 
+	this.getCurrentUser = function (){
+		return currentUser;
+	};
 	// Initailzation Function
 	// Called in $scope controller
 	this.init = function () {
@@ -61,26 +64,30 @@ app.service('$auth', function($route) {
 	this.setScopeOnAuthStateChange = function ($scope) {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-				$scope.state = user.displayName;
-				$scope.showModal = false;
 				// currentUser 객체는 global하게 접근 가능!
 				$('#modal').modal('hide');
 				// 현 사용자 정보가 메인 페이지에
 				// 적용될 수 있게 스크립트만 짜주면 될 듯
+
 				currentUser = {
 					displayName: user.displayName,
 					email: user.email,
-					photoURL: user.photoURL
-				}
+					photoURL: user.photoURL,
+					uid : user.uid
+				};
+				$scope.currentUser = currentUser;
 				angular.element('#loader-wrapper').fadeOut(500);
+				$route.reload();
 			}
 			else {
+				//$scope.currentUser = null;
 				//$scope.showModal = true;
-				$route.reload();
 				angular.element('#loader-wrapper').fadeIn(500);
 				angular.element('#img-wrapper').fadeOut(500, function(){
 					angular.element('#socialLogin').fadeIn(500);
 				});
+
+				$route.reload();
 				// 로그아웃이 됐을 경우의 로직
 				// index.html(메인페이지 화면)으로 redirect하게
 				// 하면 될 듯

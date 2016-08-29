@@ -46,6 +46,14 @@ html(lang='utf-8')
         // LOGIN Modal CSS
         link(href='stylesheets/style.css', rel='stylesheet')
 
+        // About CSS
+        link(href="stylesheets/about.css", rel='stylesheet')
+
+        link(rel='stylesheet', href='stylesheets/post.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', href='https://code.getmdl.io/1.2.0/material.cyan-light_blue.min.css')
+
     body(ng-app='app', ng-controller='appCtrl')
 
         /////////// loading splash and login page
@@ -60,7 +68,7 @@ html(lang='utf-8')
                             p 본 서비스는 Facebook 로그인을 하셔야 사용할 수 있습니다.
                             p 로그인하신 분은 조금만 기다려주세요 :)
                     div(id='img-wrapper')
-                        img(class='loader-content' src='loader.gif')
+                        img(class='loader-content' src='loader.svg')
         ////////////
         // Entire Layout
         .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
@@ -74,15 +82,15 @@ html(lang='utf-8')
                 header.demo-drawer-header
                     .demo-avatar-dropdown
                         // user infomation
-                        img.demo-avatar(src='https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.959.959/13901498_818631218238226_6299824891801431813_n.jpg?oh=e41d031652f4c6bc07915e3c7cf2620d&oe=5810E73C')
-                        span(style='padding-left: 15px; margin-top: 20px') 박명진님
+                        img.demo-avatar(src='{{currentUser.photoURL}}')
+                        span(style='padding-left: 15px; margin-top: 20px') {{currentUser.displayName}}
                         .mdl-layout-spacer
                         button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon(style='margin-top: 15px')
                             i.material-icons(role='presentation') arrow_drop_down
                             span.visuallyhidden Accounts
                         ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='accbtn')
                             li.mdl-menu__item My Post
-                            li.mdl-menu__item LogOut
+                            li.mdl-menu__item(ng-click='toggleAuth()') LogOut
                 // Menu bar
                 nav.demo-navigation.mdl-navigation.mdl-color--blue-grey-800
                     a.mdl-navigation__link(href='/#/')
@@ -111,7 +119,7 @@ html(lang='utf-8')
                     ng-view.page.pageClass(class='{{ }}')
 
         // login modal
-        modal#modal(visible='showModal && default')
+        // modal#modal(visible='showModal && default')
             .container
                 button.btn.btn-social.btn-facebook(ng-click='toggleAuth()')
                     span.fa.fa-facebook
