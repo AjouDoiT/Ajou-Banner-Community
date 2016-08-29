@@ -156,8 +156,6 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout, $rootScope){
 
                 //반경500m 이내의 마커만 표시하기
                 for (index in locations) {
-                    console.log(Math.pow((latitude * 100000 - locations[index].latitude * 100000), 2) +
-                        Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2));
                     if (Math.pow((latitude * 100000 - locations[index].latitude * 100000), 2) +
                         Math.pow((longitude * 100000 - locations[index].longitude * 100000), 2) < 9000)
                     addMarker(locations[index], index);
