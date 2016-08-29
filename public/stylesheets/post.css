@@ -1,0 +1,121 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+}
+
+/* STRUCTURE */
+
+.post{
+    width: 300px !important;
+    margin-top: 15px;
+    margin-left: 5px;
+    height:  auto !important;
+}
+
+#pagewrap {
+    padding: 5px;
+    width: 960px;
+    margin: 20px auto;
+}
+header {
+    height: 110px;
+    padding: 0 15px;
+}
+#left {
+    width: 302px;
+    float: left;
+    padding: 5px 5px;
+}
+
+#middle {
+    width: 302px; /* Account for margins + border values */
+    float: left;
+    padding: 5px 5px;
+    margin: 0px 5px 5px 5px;
+}
+
+#right {
+    width: 302px;
+    padding: 5px 5px;
+    float: left;
+}
+
+footer {
+    clear: both;
+    padding: 0 15px;
+}
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* for 980px or less */
+@media screen and (max-width: 980px) {
+
+    #pagewrap {
+        width: 94%;
+    }
+    #left {
+        width: 41%;
+        padding: 1% 4%;
+    }
+    #middle {
+        width: 41%;
+        padding: 1% 4%;
+        margin: 0px 0px 5px 5px;
+        float: right;
+    }
+
+    #right {
+        clear: both;
+        padding: 1% 4%;
+        width: auto;
+        float: none;
+    }
+
+    header, footer {
+        padding: 1% 4%;
+    }
+}
+
+/* for 700px or less */
+@media screen and (max-width: 600px) {
+
+    #left {
+        width: auto;
+        float: none;
+    }
+
+    #middle {
+        width: auto;
+        float: none;
+        margin-left: 0px;
+    }
+
+    #right {
+        width: auto;
+        float: none;
+    }
+
+}
+
+/* for 480px or less */
+@media screen and (max-width: 480px) {
+
+    header {
+        height: auto;
+    }
+    h1 {
+        font-size: 2em;
+    }
+
+}
+
+header, #left, #middle, #right {
+    margin-bottom: 5px;
+}
+
+#pagewrap, footer {
+    border: solid 1px #ccc;
+}
