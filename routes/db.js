@@ -46,6 +46,31 @@ module.exports = function(app){
 			// client needs date, and so on
 		});
 	});
+	//comments
+	app.post('/freeboard/posts',function(req,res,next){
+		var post = new Post();
+		var postId;
+		console.log(req);
+		console.log(req.body);
+		post.update({_id: req.body._id },
+		 { $push: { comment: {
+			 uid: req.body.uid,
+			 username: req.body.username,
+			 body: req.body.body,
+			 date:Date.now()} }
+		 }
+		);
+
+		post.save(function(err, data){
+			if(err){
+				console.error(err);
+				next(err);
+				return;
+			}
+			res.json(data); // if saving sucess, send data to client
+			// client needs date, and so on
+		});
+	});
 
 	//Update the post
 	/*app.put('/api/posts/id',function(req,res){

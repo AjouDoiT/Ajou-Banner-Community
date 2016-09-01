@@ -8,7 +8,8 @@ var postSchema = new Schema({
         username:       {type: String, required: true},
         body:           {type: String, required: true},
         date:           {type: Date, required: true, default: Date.now()},
-        location_id:    {type: String, required: true}
+        location_id:    {type: String, required: true},
+        comment: {type:Array, required: true, deafult: NULL}
     });
  
 module.exports= db.model('post',postSchema);
