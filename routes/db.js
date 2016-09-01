@@ -47,7 +47,7 @@ module.exports = function(app){
 		});
 	});
 	//comments
-	app.post('/freeboard/posts',function(req,res,next){
+	app.post('/freeboard/posts/comment',function(req,res,next){
 		var post = new Post();
 		var postId;
 		console.log(req);
