@@ -125,7 +125,7 @@ app.controller('mapCtrl', function ($scope, $compile, $timeout,
                 cityCircle = new google.maps.Circle({
                     center: new google.maps.LatLng(latitude, longitude),
                     //center: new google.maps.LatLng(37.2834866,127.0447932) ,
-                    radius: 100,
+                    radius: 50,
                     strokeColor: "#000000",
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
