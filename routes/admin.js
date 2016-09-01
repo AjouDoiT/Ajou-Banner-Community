@@ -10,6 +10,7 @@ router.get('/location', function (req, res, next){
     // this returns whole post array
     // from posts collection in our database
         .exec(function (err, data) {
+          //  console.log(data);
             if (err) {
                 return next(err)
             }

@@ -10,7 +10,7 @@ module.exports = function(app){
 		Post.find({location_id: req.query.location_id},{_id:0, uid:0},function(err,posts){
 		//	console.log(req.query);
 			if(err) return res.status(500).send({error: 'Database failure'});
-			//console.log(posts);
+			console.log(posts);
 			res.json(posts);
 		})
 	});
@@ -27,13 +27,13 @@ module.exports = function(app){
 	//Create post
 	app.post('/freeboard/posts',function(req,res,next){
 		var post = new Post();
-        console.log(req);
-		post.uid = req.body.uid;
+        //console.log(req);
+		if (req.body.uid) post.uid = req.body.uid;
 		post.username = req.body.username;
 		post.body = req.body.body;
 		post.date = Date.now();
 		post.location_id =  req.body.location_id;
-
+		if (req.body.photoURL) post.photoURL = req.body.photoURL;
 		console.log(req.body);
 
 		post.save(function(err, data){

@@ -243,10 +243,12 @@ app.controller('bannerCtrl', function ($scope, $rootScope,
             body : postInput,
             uid : user.uid
         };
+        if (user.photoURL) data.photoURL = user.photoURL;
+
         locationToPostSvc.createByLocationId(data)
             .then(function (res){
                 var banner = {
-                    pfPic : user.photoURL,
+                    photoURL : user.photoURL,
                     body : postInput,
                     username : user.displayName,
                     data : res.data.date
