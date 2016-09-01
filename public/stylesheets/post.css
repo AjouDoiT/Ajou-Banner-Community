@@ -12,6 +12,7 @@ body {
     margin-top: 15px;
     margin-left: 15px;
     height:  auto !important;
+    word-break:break-all !important;
 }
 
 #pagewrap {
@@ -160,12 +161,11 @@ header, #left, #middle, #right {
     background: #46B6AC !important;
     vertical-align: middle;
     height: 45px !important;
-    width:5% !important;
+    width:70px !important;
 }
 
 .exitbtn{
     position: inherit;
-    float: right;
     margin-right: 18px !important;
 }
 
