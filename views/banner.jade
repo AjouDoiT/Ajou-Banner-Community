@@ -7,7 +7,7 @@
                 h3
                     strong(style='color:black') {{title}}
             .mdl-card__supporting-text.inputgroup
-                textarea#userInput(ng-model='postInput')
+                textarea#userInput(ng-model='postInput' elastic)
                 button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored.postbtn(ng-click='addPost()')
                     | POST
 
