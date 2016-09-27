@@ -10,11 +10,11 @@ var https = require('https');
 var fs = require('fs');
 var options = {
     hostname: 'aws.lkaybob.pe.kr',
-	key: fs.readFileSync('certs/lkaybob.key'),
+	key: fs.readFileSync('certs/doitabc.key'),
 	cert:fs.readFileSync('certs/domain.crt'),
 	ca : [ fs.readFileSync('certs/root.crt'),
 	       fs.readFileSync('certs/Intermediate.crt')],
-        passphrase: 'thisisKbob106736',
+        passphrase: 'CONFIDENTIAL',
 	agent: false
 };
 
